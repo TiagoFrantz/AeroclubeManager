@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@section Styles{
+    <style>
+
+
+        .mainWall {
+            width: 100%;
+            height: 90vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .mainWall video {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1;
+            }
+
+        .mainContent {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #000000d5;
+            z-index: 2;
+        }
+
+
+            .mainContent h2 {
+                color: white;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: 50px;
+                text-align: center;
+            }
+
+            .mainContent img {
+                height: 100px;
+                margin: 20px auto;
+            }
+
+            .mainContent a {
+                color: rgb(0, 0, 0);
+                font-size: 30px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                text-decoration: none;
+                background-color: white;
+                padding: 15px;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+            }
+
+                .mainContent a img {
+                    rotate: 90deg;
+                    height: 50px;
+                    margin-left: 20px;
+                    transition: .1s;
+                }
+
+                .mainContent a:hover img {
+                    margin-left: 30px;
+                }
+
+
+        #sobre {
+            display: flex;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .sobreLeft {
+            padding: 50px;
+            width: 100%;
+        }
+
+        #sobre h3 {
+            font-size: 50px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #sobre p, #sobre span {
+            max-width: 100%;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 30px;
+        }
+
+
+        #sobre ul li {
+            max-width: 100%;
+            font-size: 27px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .sobreRight {
+            width: 100%;
+            background-image: url(imgs/cessna-5331171_1920.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: right;
+            min-height: 50vh;
+            transition: .3s;
+        }
+
+            .sobreRight:hover {
+                background-position: center;
+            }
+
+            
+@@media (max-width: 768px){
+   
+    #sobre{
+        flex-wrap: wrap;
+    }
+}
+    </style>
+}
+
+<div class="mainWall">
+    <video autoplay muted loop id="myVideo">
+        <source src="imgs/129855-746780897_tiny.mp4" type="video/mp4" />
+    </video>
+
+    <div class="mainContent">
+        <h2>Aeroclube Manager</h2>
+        <img src="imgs/aeroclubemanagerlogo.png" alt="" />
+        <!--Se não logado-->
+        <a href="#" class="mainLink">
+            Saber mais
+            <img src="imgs/modo-aviao.png" alt="" />
+        </a>
+    </div>
+</div>
+
+<section id="sobre">
+    <div class="sobreLeft">
+        <h3>Sobre nós</h3>
+        <p>
+            O Aeroclube Manager é uma aplicação eficiente para gerenciar
+            aeroclubes, oferecendo controle de usuários, permissões e atividades.
+        </p><br>
+        <span><strong>Funcionalidades:</strong></span>
+        <ul>
+            <li>
+                Gerenciamento de Usuários: Cadastro e administração de
+                administradores, instrutores e alunos, com controle de permissões.
+            </li>
+            <li>
+                Controle de Membros: Registro detalhado de membros, suas funções e
+                datas de entrada.
+            </li>
+            <li>
+                Permissões e Funções: Definição e gestão de funções múltiplas para
+                cada membro, garantindo segurança e organização.
+            </li>
+        </ul>
+        <br>
+        <p>
+            Com o Aeroclube Manager, a administração do seu aeroclube torna-se
+            <strong>simples</strong> e <strong>eficiente</strong>.
+        </p>
+    </div>
+
+    <div class="sobreRight">
+    </div>
+</section>

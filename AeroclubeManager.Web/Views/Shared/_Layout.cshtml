@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AeroclubeManager</title>    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+<body>
+
+    <header>
+        <div class="headerLogo">
+            <a href="index.html">
+                <img src="imgs/aeroclubemanagerlogo.png"
+                     alt="AeroclubeManager Logo" />
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Cadastrar</a></li>
+            </ul>
+        </nav>
+
+        <button class="menuButton">
+            <div id="menu1"></div>
+            <div id="menu2"></div>
+        </button>
+    </header>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer>
+        <div class="footerLeft">
+            <img src="~/imgs/aeroclubemanagerlogo.png" alt="Logo">
+            <span>Todos os direitos reservados 2024</span>
+        </div>
+
+
+        <div class="footerRight">
+            <a href="#">Home</a>
+            <a href="#">Política de privacidade</a>
+            <a href="#">Termos de uso</a>
+            <a href="#">Contato</a>
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
