@@ -1,0 +1,297 @@
+﻿@model RegisterModelView
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+@section Styles{
+        <style>
+        /* From Uiverse.io by Yaya12085 */ 
+
+.content{
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(imgs/cessna-5331171_1920.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.content::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #010101b4;
+    backdrop-filter: blur(10px);
+
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  max-width: 500px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  z-index: 2;
+  margin: 15px auto;
+}
+
+.title {
+  font-size: 28px;
+  color: royalblue;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.title::before,.title::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-image: url(imgs/modo-aviao.png);
+  background-size: contain;
+}
+
+.title::before {
+  width: 18px;
+  height: 18px;
+}
+
+.title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+.message, .signin {
+  color: rgba(88, 87, 87, 0.822);
+  font-size: 14px;
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a {
+  color: royalblue;
+}
+
+.signin a:hover {
+  text-decoration: underline royalblue;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+}
+
+.form label {
+  position: relative;
+}
+
+.form label .input {
+  width: 100%;
+  padding: 10px 10px 20px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+}
+
+.form label .input + span {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  color: grey;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+  top: 15px;
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,.form label .input:valid + span {
+  top: 30px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.form label .input:valid + span {
+  color: green;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: royalblue;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+}
+
+.submit:hover {
+  background-color: rgb(56, 90, 194);
+}
+
+@@media (max-width: 768px){
+    .form{
+        margin: 10px;
+    }
+}
+
+@@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+    </style>
+}
+
+<!-- From Uiverse.io by Yaya12085 -->
+<form class="form" id="registerForm" asp-action="Register" asp-controller="Account">
+    <p class="title">Cadastrar </p>
+    <p class="message">Signup now and get full access to our app. </p>
+    <div class="flex justify-content-between">
+        <label style="width: 100%">
+            <input required="" placeholder="" type="text" name="FirstName" class="input">
+            <span>Nome</span>
+        </label>
+
+        <label style="width: 100%">
+            <input required="" placeholder="" type="text" name="LastName" class="input">
+            <span>Sobrenome</span>
+        </label>
+    </div>
+
+    <label>
+        <input required="" placeholder="" type="email" name="Email" class="input">
+        <span>Email</span>
+    </label>
+
+    <label>
+        <input required="" placeholder="" id="cpf" type="text" name="Document" class="input">
+        <span>CPF</span>
+    </label>
+    <span asp-validation-for="Document" class="text-danger"></span>
+
+
+    <label>
+        <input required="" placeholder="" id="password" name="Password" type="password" class="input">
+        <span>Senha</span>
+    </label>
+
+    <input type="hidden" name="ReturnUrl" value="ReturnUrl" />
+    <label>
+        <input required="" placeholder="" id="confirmPassword" name="ConfirmPassword" type="password" class="input">
+        <span>Confirme a senha</span>
+    </label>
+    <button class="submit">Cadastrar</button>
+    <p class="signin">Já possui uma conta? <a href="#">Entrar</a> </p>
+</form>
+
+
+
+    @section Scripts{
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+        <script>
+
+
+        document.getElementById('cpf').addEventListener('input', function (e) {
+            var value = e.target.value;
+            var cpfPattern = value.replace(/\D/g, '') // Remove qualquer coisa que não seja número
+                .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona ponto após o terceiro dígito
+                .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona ponto após o sexto dígito
+                .replace(/(\d{3})(\d)/, '$1-$2') // Adiciona traço após o nono dígito
+                .replace(/(-\d{2})\d+?$/, '$1'); // Impede entrada de mais de 11 dígitos
+            e.target.value = cpfPattern;
+        });
+
+        function validaCPF(cpf) {
+            cpf = cpf.replace(/\D+/g, '');
+            if (cpf.length !== 11) return false;
+
+            let soma = 0;
+            let resto;
+            if (/^(\d)\1{10}$/.test(cpf)) return false; // Verifica sequências iguais
+
+            for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+            resto = (soma * 10) % 11;
+            if ((resto === 10) || (resto === 11)) resto = 0;
+            if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+            soma = 0;
+            for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+            resto = (soma * 10) % 11;
+            if ((resto === 10) || (resto === 11)) resto = 0;
+            if (resto !== parseInt(cpf.substring(10, 11))) return false;
+
+            return true;
+        }
+
+
+
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            var password1 = document.getElementById("password");
+            var confirm = document.getElementById("confirmPassword");
+            
+            var cpf = document.getElementById('cpf').value;
+
+            if (!validaCPF(cpf)) {
+                e.preventDefault(); // Impede o envio do formulário
+
+                Swal.fire({
+                    title: "CPF",
+                    text: "Verfique se o seu CPF está correto",
+                    icon: "error"
+                });
+                document.getElementById('cpf').focus(); // Foca no campo de CPF após o erro
+                return
+            }
+            /*
+            if(password1 != confirm){
+                e.preventDefault(); // Impede o envio do formulário
+
+                Swal.fire({
+                    title: "Senhas",
+                    text: "Suas senhas não estão iguais.",
+                    icon: "error"
+                });
+
+                return
+            }*/
+
+
+        });
+        </script>
+
+
+    }

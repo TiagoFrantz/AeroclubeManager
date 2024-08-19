@@ -1,11 +1,19 @@
+using AeroclubeManager.Core.Entities.Email;
 using AeroclubeManager.Core.Entities.User;
+using AeroclubeManager.Core.Interfaces.Services.Email;
+using AeroclubeManager.Core.Services.Email;
 using AeroclubeManager.Infra.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IEmailSender, EmailSenderService>();
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AeroclubeManagerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

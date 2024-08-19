@@ -1,0 +1,72 @@
+﻿@model InvitationLinkSentModelView
+@{
+	ViewData["Title"] = "Confirmação de email";
+}
+
+@section Styles{
+    <style>
+        .container {
+            background-image: url('/imgs/aviaotardizinha.jpg');
+            background-size: cover;
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .container main {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+
+
+        .emailContainer {
+            z-index: 2;
+            position: relative;
+            width: 80%;
+            background-color: rgba(18, 18, 18, 0.549);
+            padding: 30px;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .email_header h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .email_header span {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .emailContainer__content p {
+            margin-top: 10px;
+            text-align: justify;
+        }
+
+    </style>
+}
+
+
+<div class="emailContainer">
+    <div class="email_header">
+        <h1>Email enviado</h1>
+        <span>Um link para a confirmação da conta foi enviado ao seu email @Model.Email.</span>
+    </div>
+
+    <div class="emailContainer__content">
+        <p>
+            @Model.UserName, um email foi enviado para @Model.Email. Verifique sua caixa de entrada e sua <span style="color: rgb(255, 108, 108);">caixa de spam</span>.
+
+        </p>
+    </div>
+
+
+</div>

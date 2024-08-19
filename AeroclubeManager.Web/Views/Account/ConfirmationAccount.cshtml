@@ -1,0 +1,91 @@
+﻿@model ConfirmationAccountModelView
+@{
+	if (Model.IsSucceed)
+		ViewData["Title"] = "Confirmação realizada";
+	else
+		ViewData["Title"] = "Erro ao confirmar a conta";
+}
+
+
+@section Styles {
+    <style>
+        .container {
+            background-image: url('/imgs/aviaotardizinha.jpg');
+            background-size: cover;
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .container main {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+
+
+        .emailContainer {
+            z-index: 2;
+            position: relative;
+            width: 80%;
+            background-color: rgba(18, 18, 18, 0.549);
+            padding: 30px;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .email_header h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .email_header span {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .emailContainer__content p {
+            margin-top: 10px;
+            text-align: justify;
+        }
+
+    </style>
+}
+
+
+<div class="emailContainer">
+
+    @if (Model.IsSucceed)
+    {
+        <div class="email_header">
+            <h1>Conta confirmada</h1>
+            <span>Sua conta foi confirmada</span>
+        </div>
+
+        <div class="emailContainer__content">
+            <p>
+                @Model.UserName, sua conta com o email @Model.Email foi confirmada com sucesso. Agora, faça <a href="#">login</a> em sua conta.
+            </p>
+        </div>
+    } else
+    {
+        <div class="email_header">
+            <h1>Ocorreu um erro</h1>
+            <span>Sua conta não foi confirmada por que ocorreu um erro</span>
+        </div>
+
+        <div class="emailContainer__content">
+            <p>
+                Tente pedir o <a href="#">envio do email novamente</a>. Caso não consiga novamente, nos contate.
+            </p>
+        </div>
+    }
+
+</div>
+
