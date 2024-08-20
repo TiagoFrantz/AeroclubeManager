@@ -28,7 +28,11 @@
     backdrop-filter: blur(10px);
 
 }
-
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
 .form {
   display: flex;
@@ -176,7 +180,7 @@
 <!-- From Uiverse.io by Yaya12085 -->
 <form class="form" id="registerForm" asp-action="Register" asp-controller="Account">
     <p class="title">Cadastrar </p>
-    <p class="message">Signup now and get full access to our app. </p>
+    <p class="message">Crie uma nova conta. </p>
     <div class="flex justify-content-between">
         <label style="width: 100%">
             <input required="" placeholder="" type="text" name="FirstName" class="input">
@@ -212,7 +216,7 @@
         <span>Confirme a senha</span>
     </label>
     <button class="submit">Cadastrar</button>
-    <p class="signin">Já possui uma conta? <a href="#">Entrar</a> </p>
+    <p class="signin">Já possui uma conta? <a asp-action="Login" asp-controller="Account">Entrar</a> </p>
 </form>
 
 

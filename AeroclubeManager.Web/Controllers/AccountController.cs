@@ -54,9 +54,39 @@ namespace AeroclubeManager.Web.Controllers
             return View();
         }
 
+
+        [Route("/login")]
         public IActionResult Login(string? returnUrl)
         {
             return View();
+        }
+
+        [Route("/login")]
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginModelView model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+                return RedirectToLocal(model.ReturnUrl);
+
+            ModelState.AddModelError(string.Empty, "Não foi possível fazer o login");
+            return View(model);
+        }
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
         }
 
         [HttpGet]
@@ -155,11 +185,14 @@ namespace AeroclubeManager.Web.Controllers
         }
 
 
+        [Route("/confirmationinvited")]
         public IActionResult InvitationLinkSent(InvitationLinkSentModelView model)
         {
             return View(model);
         }
 
+
+        [Route("/confirmationaccount")]
         public async Task<IActionResult> ConfirmationAccount(string userId, string userCode)
         {
             if (userId == null || userCode == null)

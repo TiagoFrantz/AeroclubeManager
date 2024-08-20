@@ -1,21 +1,38 @@
 using System.Diagnostics;
+using AeroclubeManager.Core.Entities.User;
 using AeroclubeManager.Web.Models;
+using AeroclubeManager.Web.Models.Home;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AeroclubeManager.Web.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
+
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new HomeIndexModelView();
+            bool isAuthenticated = User.Identity.IsAuthenticated;
+            ApplicationUser user = null;
+            if (isAuthenticated)
+                user = await _userManager.GetUserAsync(User);
+
+            model.UserAuthenticated = isAuthenticated;
+            model.User = user;
+
+
+            return View(model);
         }
 
         public IActionResult Privacy()

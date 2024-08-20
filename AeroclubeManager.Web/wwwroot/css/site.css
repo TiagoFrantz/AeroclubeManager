@@ -136,12 +136,26 @@ footer {
             text-decoration: underline;
         }
 
+        nav ul li a:hover{
+            color: white;
+        }
+
+
+
 
 @media (max-width: 768px) {
     .menuButton {
         display: flex;
         transition: .3s;
         cursor: pointer;
+    }
+
+    nav ul {
+        padding-left: 0;
+    }
+
+    nav ul li{
+        margin-left: 0;
     }
 
         .menuButton.close {
@@ -157,15 +171,17 @@ footer {
             transition: .3s;
         }
 
-        .menuButton.close #menu1 {
-            rotate: 45deg;
-            transform: translateY(100%);
-        }
+    .menuButton.close #menu1 {
+        rotate: 45deg;
+        transform: translateY(100%);
+    }
 
-        .menuButton.close #menu2 {
-            rotate: -45deg;
-            transform: translateY(-123%);
-        }
+    .menuButton.close #menu2 {
+        rotate: -45deg;
+        animation: AnimeMenu2 1s forwards;
+    }
+
+
 
 
     nav {
