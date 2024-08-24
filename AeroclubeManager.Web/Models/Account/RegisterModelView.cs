@@ -35,7 +35,7 @@ namespace AeroclubeManager.Web.Models.Account
         [Required]
         [StringLength(255)]
         [DataType(DataType.Password)]
-        [Compare("Password")]
+        [Compare("Password", ErrorMessage = "Senhas não estão iguais.")]
         public string ConfirmPassword { get; set;} = string.Empty;
 
 

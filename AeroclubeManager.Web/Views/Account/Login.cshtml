@@ -180,6 +180,8 @@
 
 <!-- From Uiverse.io by Yaya12085 -->
 <form class="form" id="loginForm" asp-action="Login" asp-controller="Account">
+    @Html.ValidationSummary()
+
     <p class="title">Sign in </p>
     <p class="message">Entre com a sua conta </p>
 

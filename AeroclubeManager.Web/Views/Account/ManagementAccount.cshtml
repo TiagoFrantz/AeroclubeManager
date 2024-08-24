@@ -1,0 +1,169 @@
+﻿@model ManagementAccountModelView
+@{
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/managementaccount.css" />
+    
+}
+
+
+
+<section class="accountHeader">
+    <h1>Gerenciar conta</h1>
+</section>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<section class="perfilImage">
+    <img id="preview" src="@Model.PerfilImage" onerror="this.src='https://static.vecteezy.com/ti/vetor-gratis/p3/3715527-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-vetor.jpg'" alt="Foto de perfil">
+    <button class="perfilImage__adicionar btn btn-primary" onclick="mostrarPerfilPopUp()">Adicionar foto</button>
+    <button class="perfilImage__remover btn btn-secondary" onclick="removePerfilImage()">Remover foto</button>
+</section>
+
+<section class="accountInfo">
+    <h2>Suas informações</h2>
+
+    <div class="accountInputs">
+
+        <input type="hidden" id="userId" value="@Model.UserId" />
+
+
+        <!--  /* From Uiverse.io by mrhyddenn */
+        -->
+        <div class="accountInput">
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Primeiro nome" required="" id="firstNameInput" value="@Model.FirstName">
+                <label for="firstNameInput" class="form__label">Primeiro nome</label>
+            </div>
+        </div>
+
+        <div class="accountInput">
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Sobrenome" required="" id="lastNameInput" value="@Model.LastName">
+                <label for="lastNameInput" class="form__label">Sobrenome</label>
+            </div>
+        </div>
+
+        <div class="accountInput">
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Email" disabled id="email" value="@Model.Email">
+                <label for="email" class="form__label">Email</label>
+            </div>
+        </div>
+
+        <div class="accountInput">
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="CPF" required="" id="cpf" value="@Model.Document">
+                <label for="cpf" class="form__label">CPF</label>
+            </div>
+        </div>
+
+
+        <div class="accountInput">
+            <div class="form__group field">
+                <input type="date" class="form__field" placeholder="CPF" required="" id="nascimento" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")">
+                <label for="nascimento" class="form__label">Data de nascimento</label>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <button id="salvarDados" onclick="sendEdit()">
+        Salvar
+    </button>
+
+
+
+</section>
+
+<div class="perfilImagePopUp">
+    <!--/* From Uiverse.io by vinodjangid07 */ -->
+
+    <div class="file-upload-form" id="dropContainer">
+        <label for="file" class="file-upload-label">
+            <button class="closePerfilContainer" onclick="esconderPerfilPopUp()">X</button>
+            <div class="file-upload-design">
+                <svg viewBox="0 0 640 512" height="1em">
+                    <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"></path>
+                </svg>
+                <p>Leve seu arquivo até aqui</p>
+                <p>ou</p>
+                <span class="browse-button">selecione do dispositivo</span>
+            </div>
+            <input id="file" type="file" />
+        </label>
+    </div>
+
+</div>
+
+
+
+ @section Scripts{
+   <script src="~/js/managementaccount.js"></script>
+
+   <script>
+
+      /* Está no script acima 
+        let inputCpf = document.getElementById("cpf")
+        let firstName = document.getElementById("firstNameInput")
+        let lastName = document.getElementById("lastNameInput")
+        let dataNascimento = document.getElementById("nascimento")
+        let submitButton = document.getElementById("salvarDados") */
+
+
+        function sendEdit() {
+            var userCpf = inputCpf.value;
+            var cpfValidade = validaCPF(userCpf);
+            if (!cpfValidade || firstName.value.trim() == "" || lastName.value.trim() == "") {
+                Swal.fire({
+                    title: "Dados",
+                    text: "Verifique se os seus dados estão corretos",
+                    icon: "error"
+                });
+                return;
+            }
+
+            let userFirstName = firstName.value;
+            let userLastName = lastName.value;
+            let userNascimento = dataNascimento.value;
+            let userId = document.getElementById("userId").value;
+            let userImage = fileInput.files[0]; // Certifique-se que fileInput está definido
+
+            var formData = new FormData();
+            formData.append("FirstName", userFirstName);
+            formData.append("LastName", userLastName);
+            formData.append("DateOfBirth", userNascimento);
+            formData.append("UserId", userId);
+            formData.append("Document", userCpf);
+            formData.append("ImagemSelecionada", imagemSelecionada);
+            formData.append("Image", userImage);
+
+            $.ajax({
+                url: '/Account/EditAccount',
+                type: 'POST',
+                data: formData,
+                contentType: false, // Para garantir que o jQuery não defina um cabeçalho Content-Type
+                processData: false, // Para impedir que o jQuery tente processar os dados
+                success: function (response) {
+                    Swal.fire({
+                        title: "Atualização",
+                        text: response.message,
+                        icon: "success"
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    Swal.fire({
+                        title: "Atualização",
+                        text: "Não foi possível atualizar os dados. Erro: " + xhr.responseText + ".",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+
+        
+       
+   </script>
+}

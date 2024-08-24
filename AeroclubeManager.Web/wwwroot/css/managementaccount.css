@@ -1,0 +1,340 @@
+﻿body {
+    background: url(../imgs/aviaotardizinha.jpg);
+    position: relative;
+}
+
+
+.accountHeader {
+    width: calc(100% - 40px);
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 10px;
+}
+
+.perfilImage {
+    width: calc(100% - 40px);
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background: rgb(182,181,196);
+    background: linear-gradient(54deg, rgba(182,181,196,1) 0%, rgba(139,140,140,1) 41%, rgba(67,70,74,1) 100%);
+}
+
+img#preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 40%;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.149);
+}
+
+.perfilImage button {
+    margin-left: 20px;
+    font-size: 20px;
+    padding: 20px;
+    box-shadow: 5px 5px rgb(81, 81, 81);
+}
+
+.perfilImagePopUp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.445);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#dropContainer {
+    min-width: 900px !important;
+}
+
+.file-upload-label {
+    min-width: 30%;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    margin-top: 100px; /*animação*/
+}
+
+.closePerfilContainer {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: red;
+    font-size: 100%;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.295);
+    transition: .3s;
+}
+
+    .closePerfilContainer:active {
+        transform: translateX(-5px);
+        transform: translateY(5px);
+        box-shadow: 0 0 black;
+    }
+
+.perfilImagePopUp.open {
+    animation: AnimePopUp .3s forwards;
+}
+
+.perfilImagePopUp.close .file-upload-label {
+    animation: AnimeClosePopUp .3s forwards;
+}
+
+@keyframes AnimeClosePopUp {
+    to {
+        margin-top: -200vw;
+    }
+}
+
+@keyframes AnimePopUp {
+    0% {
+        display: flex;
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.perfilImagePopUp.open .file-upload-label {
+    animation: AnimePContainer 1s forwards;
+}
+
+@keyframes AnimePContainer {
+    0% {
+        opacity: 0;
+        margin-top: 50px;
+    }
+
+    100% {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+
+@media (max-width: 968px) {
+    .perfilImage {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .perfilImage button {
+            width: 90%;
+            margin-left: 0;
+        }
+}
+
+/* From Uiverse.io by vinodjangid07 */
+.file-upload-form {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-upload-label input {
+    display: none;
+}
+
+.file-upload-label svg {
+    height: 50px;
+    fill: rgb(82, 82, 82);
+    margin-bottom: 20px;
+}
+
+.file-upload-label {
+    cursor: pointer;
+    background-color: #ddd;
+    padding: 30px 70px;
+    border-radius: 40px;
+    border: 2px dashed rgb(82, 82, 82);
+    box-shadow: 0px 0px 200px -50px rgba(0, 0, 0, 0.719);
+}
+
+.file-upload-design {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.browse-button {
+    background-color: rgb(82, 82, 82);
+    padding: 5px 15px;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.3s;
+}
+
+    .browse-button:hover {
+        background-color: rgb(14, 14, 14);
+    }
+
+#dropContainer.dragover svg {
+    animation: pulse 1s infinite;
+    transition: .2s;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 121, 107, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 10px 20px rgba(0, 121, 107, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 121, 107, 0);
+    }
+}
+/* From Uiverse.io by mrhyddenn */
+.form__group {
+    position: relative;
+    padding: 20px 0 0;
+    width: 100%;
+}
+
+.form__field {
+    font-family: inherit;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: #393939;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+    .form__field::placeholder {
+        color: transparent;
+        display: none;
+    }
+
+    .form__field:placeholder-shown ~ .form__label {
+        font-size: 17px;
+        cursor: text;
+        top: 20px;
+    }
+
+.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #000000;
+    pointer-events: none;
+}
+
+.form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #747677, #4a4d4e);
+    border-image-slice: 1;
+}
+
+    .form__field:focus ~ .form__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 17px;
+        color: #484848;
+        font-weight: 700;
+    }
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+    box-shadow: none;
+}
+
+.accountInfo {
+    width: calc(100% - 40px);
+    padding: 20px;
+    margin: 20px;
+    background: rgb(182,181,196);
+    background: linear-gradient(54deg, rgba(182,181,196,1) 0%, rgba(139,140,140,1) 41%, rgba(67,70,74,1) 100%);
+    color: white;
+}
+
+.accountInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.accountInput {
+    width: 100%;
+    background: linear-gradient(54deg, white, grey);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 1px 2px rgba(0, 0, 0, 0.353);
+    margin-top: 10px;
+}
+
+.form__group {
+    width: 100%;
+}
+
+    .form__group input {
+        width: 100%;
+    }
+
+#salvarDados {
+    display: flex;
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 30px;
+    background: linear-gradient(49deg, green, rgb(1, 91, 1));
+    color: white;
+    border: none;
+    border-radius: 15px;
+    transition: .3s;
+}
+
+    #salvarDados:hover:not(#salvarDados:disabled) {
+        box-shadow: 5px 5px rgba(0, 0, 0, 0.421);
+        background: linear-gradient(49deg, rgba(0, 128, 0, 0.7), rgba(1, 91, 1, 0.7));
+        backdrop-filter: blur(10px);
+    }
+
+    #salvarDados:disabled {
+        cursor: no-drop;
+    }
+
+#drop-area.highlight {
+    background-color: #f0f8ff;
+}

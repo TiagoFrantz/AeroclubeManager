@@ -178,7 +178,9 @@
 }
 
 <!-- From Uiverse.io by Yaya12085 -->
+
 <form class="form" id="registerForm" asp-action="Register" asp-controller="Account">
+    @Html.ValidationSummary()
     <p class="title">Cadastrar </p>
     <p class="message">Crie uma nova conta. </p>
     <div class="flex justify-content-between">
@@ -223,7 +225,6 @@
 
     @section Scripts{
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
         <script>
@@ -264,8 +265,8 @@
 
 
         document.getElementById('registerForm').addEventListener('submit', function (e) {
-            var password1 = document.getElementById("password");
-            var confirm = document.getElementById("confirmPassword");
+            var password1 = document.getElementById("password").value;
+            var confirm = document.getElementById("confirmPassword").value;
             
             var cpf = document.getElementById('cpf').value;
 
@@ -280,7 +281,7 @@
                 document.getElementById('cpf').focus(); // Foca no campo de CPF após o erro
                 return
             }
-            /*
+            
             if(password1 != confirm){
                 e.preventDefault(); // Impede o envio do formulário
 
@@ -291,7 +292,7 @@
                 });
 
                 return
-            }*/
+            }
 
 
         });

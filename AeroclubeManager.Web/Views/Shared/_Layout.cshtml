@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@using AeroclubeManager.Core.Entities.User;
+@inject UserManager<ApplicationUser> userManager;
+
+@{
+    var user = await userManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +15,157 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
+
+         <style>
+        .accountDesk {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative !important;
+        }
+
+        .accountButton {
+          display: flex;
+          align-items: center;
+          background-color: transparent;
+          border: none;
+          cursor:pointer;
+
+        }
+
+        .accountButton:hover > .accountImgCon{
+          scale: 1.2;
+        }
+
+        .accountButton span {
+          color: white;
+          font-size: 20px;
+        }
+
+        .accountButton span:hover{
+          text-decoration: underline;
+        }
+
+        .accountImg {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .accountImgCon{
+          background: linear-gradient(rgb(129, 129, 176), rgb(158, 125, 158));
+          box-sizing: border-box;
+          overflow: hidden;
+          border-radius: 50%;
+          margin-left: 10px;
+          box-sizing: border-box;
+          transition: .3s;
+          height: 30px;
+          width: 30px;
+          border: 1px solid white;
+        }
+
+        .accountMobile{
+          display: none;
+        }
+
+        .accountPanel{
+          position: absolute;
+          bottom: -10px;
+            background-color: rgb(0 0 0 / 55%);
+            transform: translateY(50%);
+          z-index: 3;
+          display: none;
+          flex-direction: column;
+          padding: 10px;
+          border-radius: 10px;
+          gap: 5px;
+          color: white;
+          padding: 20px;
+          box-sizing: border-box;
+          backdrop-filter: blur(10px);
+        }
+
+        .open{
+          display: flex;
+          animation: AnimeEnterIn .3s forwards;
+        }
+
+        .close{
+          animation: AnimeEnterOut .3s forwards;
+        }
+
+        .accountPanel a{
+         background-color: rgb(54, 54, 54);
+         color: white;
+         padding: 10px;
+         text-decoration: none;
+         border-radius: 5px;
+         transition: .3s;
+        }
+
+        .accountPanel a:hover{
+          background-color: rgba(255, 255, 255, 0.137);
+          backdrop-filter: blur(5px);
+        }
+
+        @@keyframes AnimeEnterIn{
+          0%{
+          display: none;
+          bottom: -50px;
+          opacity: 0;
+          }
+
+          10%{
+            display: flex;
+          }
+
+          20%{
+            display: flex;
+            bottom: -40px;
+            opacity: .1;
+          }
+
+          100%{
+            display: flex;
+            bottom: -10px;
+            opacity: 1;
+          }
+        }
+
+        @@keyframes AnimeEnterOut{
+          0%{
+          display: flex;
+          }
+
+          50%{
+            opacity: 0;
+          }
+
+          100%{
+            opacity: 0;
+            display: none;
+          }
+        }
+
+
+        .accountPanel span{
+          text-align: center;
+          padding: 10px;
+        }
+
+
+        @@media (max-width: 768px){
+          .accountDesk{
+            display: none;
+          }
+
+          .accountMobile{
+            display: flex;
+          }
+        }
+      </style>
+
 
 </head>
 <body>
@@ -21,10 +180,85 @@
 
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a asp-action="Index" asp-controller="Home">Home</a></li>
                 <li><a href="#">Sobre</a></li>
-                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                <li><a asp-controller="Account" asp-action="Register">Cadastrar</a></li>
+
+                @if (User.Identity.IsAuthenticated && user != null)
+                {
+                    <div class="accountDesk">
+                        <ul>
+                            <li>
+                                <button class="accountButton" onclick="openPanel()">
+                                    <span>Olá, @user.FirstName</span>
+                                    <div class="accountImgCon">
+                                        <img class="accountImg"
+                                             src="@user.PerfilImage"
+                                             alt="Foto de perfil"
+                                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3106/3106921.png'" />
+                                    </div>
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="accountPanel close">
+                            <span>@user.FirstName @user.LastName</span>
+                            <a asp-action="ManagementAccount" asp-controller="Account">Configurações</a>
+                            <a href="#">Dashboard</a>
+                            <a href="#">Sair</a>
+                        </div>
+                    </div>
+
+                    <div class="accountMobile">
+                        <ul>
+                            <li>
+                                <a style="display: flex; align-items: center;" asp-action="ManagentAccount" asp-controller="Account">
+                                    Sua conta
+                                    <div class="accountImgCon">
+                                        <img class="accountImg"
+                                             src="@user.PerfilImage"
+                                             alt="Foto de perfil"
+                                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3106/3106921.png'" />
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <script>
+                        let accountPanel = document.querySelector(".accountPanel");
+                        let desktopPanel = document.querySelector(".accountDesk")
+
+                        function openPanel() {
+                            accountPanel.classList.toggle("open");
+                            accountPanel.classList.toggle("close")
+                        }
+
+                        function closePanel() {
+                            accountPanel.classList.remove("open");
+                            accountPanel.classList.add("close");
+
+                        }
+
+                        document.querySelector(".accountButton").addEventListener("click", openPanel())
+
+                        accountPanel.addEventListener("mouseleave", closePanel())
+
+                        document.addEventListener('click', function (event) {
+                            if (!desktopPanel.contains(event.target)) {
+                                closePanel()
+                            }
+                        });
+
+                    </script>
+
+
+
+                } else
+                {
+                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                    <li><a asp-controller="Account" asp-action="Register">Cadastrar</a></li>
+                }
+
             </ul>
         </nav>
 
@@ -61,6 +295,11 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
+
+  
 </body>
 </html>

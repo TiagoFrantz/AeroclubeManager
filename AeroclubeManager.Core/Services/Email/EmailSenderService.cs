@@ -52,9 +52,12 @@ namespace AeroclubeManager.Core.Services.Email
                 //mail.Attachments.Add(new Attachment(arquivo));
                 //
 
+                string senha = Environment.GetEnvironmentVariable("PASSWORD_GOOGLEACCOUNT");
+
+
                 using (SmtpClient smtp = new SmtpClient(_emailSettings.PrimaryDomain, _emailSettings.PrimaryPort))
                 {
-                    smtp.Credentials = new NetworkCredential(_emailSettings.UsernameEmail, _emailSettings.UsernamePassword);
+                    smtp.Credentials = new NetworkCredential(_emailSettings.UsernameEmail, senha);
                     smtp.EnableSsl = true;
                     await smtp.SendMailAsync(mail);
                 }

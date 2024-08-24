@@ -13,6 +13,11 @@ using System.Text;
 using System.Text.Encodings.Web;
 using RestSharp;
 using AeroclubeManager.Core.Interfaces.Services.Email;
+using Microsoft.AspNetCore.Authorization;
+using AeroclubeManager.Web.Attributes;
+using System.Text.Json;
+using AeroclubeManager.Core.Interfaces.Services.User;
+using AeroclubeManager.Core.Interfaces.Services.Image;
 
 namespace AeroclubeManager.Web.Controllers
 {
@@ -24,12 +29,16 @@ namespace AeroclubeManager.Web.Controllers
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<RegisterModelView> _loggerRegister;
+        private readonly IUserService _userService;
+        private readonly IImageService _imageService;
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
             IUserStore<ApplicationUser> userStore,
             UserManager<ApplicationUser> userManager,
             ILogger<RegisterModelView> loggerRegister,
-            IEmailSender emailSender
+            IEmailSender emailSender,
+            IUserService userService,
+            IImageService imageService
             )
         {
             _userManager = userManager;
@@ -38,6 +47,8 @@ namespace AeroclubeManager.Web.Controllers
             _loggerRegister = loggerRegister;
             _emailStore = GetEmailStore();
             _emailSender = emailSender;
+            _userService = userService;
+            _imageService = imageService;
         }
 
         public IUserEmailStore<ApplicationUser> GetEmailStore()
@@ -55,6 +66,30 @@ namespace AeroclubeManager.Web.Controllers
         }
 
 
+        [ConfirmedAccount]
+        public async Task<IActionResult> ManagementAccount()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Não foi possível validar o usuário.");
+                return View();
+            }
+
+            var model = new ManagementAccountModelView();
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.DateOfBirth = user.DateOfBirth;
+            model.Document = user.Document;
+            model.Email = user.Email;
+            model.UserId = user.Id;
+            model.PerfilImage = user.PerfilImage;
+
+            return View(model);
+        }
+
+
         [Route("/login")]
         public IActionResult Login(string? returnUrl)
         {
@@ -66,7 +101,10 @@ namespace AeroclubeManager.Web.Controllers
         public async Task<IActionResult> Login(LoginModelView model)
         {
             if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Não foi possível fazer o login. Algumas informações estão erradas.");
                 return View(model);
+            }
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
 
@@ -88,6 +126,49 @@ namespace AeroclubeManager.Web.Controllers
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
+
+        [ConfirmedAccount]
+        [HttpPost]
+        [Route("Account/EditAccount")]
+        public async Task<IActionResult> EditAccount(string firstName, string lastName, DateTime dateOfBirth, string userId, string document, bool imagemSelecionada, IFormFile image)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || user.Id != userId)
+            {
+                return BadRequest();
+            }
+
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.Document = document;
+            user.DateOfBirth = dateOfBirth;
+
+            if (imagemSelecionada)
+            {
+
+                using(var memoryStream = new MemoryStream())
+                {
+                    await image.CopyToAsync(memoryStream);
+                    var imageBytes = memoryStream.ToArray();
+                    var nameFile = user.FirstName + user.LastName + Guid.NewGuid().ToString();
+                    user.PerfilImage = await _imageService.UploadImage(imageBytes, nameFile);
+
+                }
+
+            } else
+            {
+                user.PerfilImage = "";
+            }
+
+            var result = await _userService.EditUser(user.Id, user);
+
+            if(!result)
+            return BadRequest();
+
+            return Ok(new { message = $"Atualizado com sucesso" });
+
+        }
+
 
         [HttpGet]
         [Route("/register")]
@@ -175,10 +256,16 @@ namespace AeroclubeManager.Web.Controllers
                 }
                 catch (Exception ex) {
                     Console.WriteLine("Occcoreu um erro: " + ex.ToString());
+                    ModelState.AddModelError(string.Empty, "Não foi possível enviar email de configuração.");
+                    return View(model);
+
                 }
                 System.Console.WriteLine("Sent");
 
             }
+
+
+            ModelState.AddModelError(string.Empty, "Não foi possível fazer o registro da conta.");
             return View(model);
 
 

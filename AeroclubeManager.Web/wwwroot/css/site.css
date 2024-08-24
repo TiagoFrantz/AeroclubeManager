@@ -76,7 +76,7 @@ nav {
     flex-direction: column;
     justify-content: space-around;
     display: none;
-    background: none;
+    background: transparent;
     border: none;
 }
 
@@ -158,7 +158,7 @@ footer {
         margin-left: 0;
     }
 
-        .menuButton.close {
+        .menuButton.closeM {
             transform: translateX(20%);
             z-index: 7;
             position: fixed;
@@ -171,16 +171,15 @@ footer {
             transition: .3s;
         }
 
-    .menuButton.close #menu1 {
+    .menuButton.closeM #menu1 {
         rotate: 45deg;
         transform: translateY(100%);
     }
 
-    .menuButton.close #menu2 {
+    .menuButton.closeM #menu2 {
         rotate: -45deg;
-        animation: AnimeMenu2 1s forwards;
+        transform: translateY(-123%);
     }
-
 
 
 
