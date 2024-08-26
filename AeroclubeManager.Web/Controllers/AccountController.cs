@@ -18,6 +18,7 @@ using AeroclubeManager.Web.Attributes;
 using System.Text.Json;
 using AeroclubeManager.Core.Interfaces.Services.User;
 using AeroclubeManager.Core.Interfaces.Services.Image;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AeroclubeManager.Web.Controllers
 {
@@ -89,10 +90,29 @@ namespace AeroclubeManager.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Logout(string? returnUrl)
+        {
+            var result = _signInManager.SignOutAsync();
+
+
+            if(returnUrl != null)
+            {
+                return RedirectToLocal(returnUrl);
+            }
+
+            return RedirectToAction("Login", "Account");   
+
+        }
+
 
         [Route("/login")]
         public IActionResult Login(string? returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ManagementAccount");
+            }
             return View();
         }
 
@@ -100,6 +120,11 @@ namespace AeroclubeManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModelView model)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ManagementAccount");
+            }
+
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError(string.Empty, "Não foi possível fazer o login. Algumas informações estão erradas.");
@@ -130,7 +155,7 @@ namespace AeroclubeManager.Web.Controllers
         [ConfirmedAccount]
         [HttpPost]
         [Route("Account/EditAccount")]
-        public async Task<IActionResult> EditAccount(string firstName, string lastName, DateTime dateOfBirth, string userId, string document, bool imagemSelecionada, IFormFile image)
+        public async Task<IActionResult> EditAccount(string firstName, string lastName, DateTime dateOfBirth, string userId, string document, bool imageUpdated, bool imagemSelecionada, IFormFile image)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null || user.Id != userId)
@@ -143,7 +168,7 @@ namespace AeroclubeManager.Web.Controllers
             user.Document = document;
             user.DateOfBirth = dateOfBirth;
 
-            if (imagemSelecionada)
+            if (imagemSelecionada && imageUpdated)
             {
 
                 using(var memoryStream = new MemoryStream())
@@ -151,13 +176,20 @@ namespace AeroclubeManager.Web.Controllers
                     await image.CopyToAsync(memoryStream);
                     var imageBytes = memoryStream.ToArray();
                     var nameFile = user.FirstName + user.LastName + Guid.NewGuid().ToString();
-                    user.PerfilImage = await _imageService.UploadImage(imageBytes, nameFile);
-
+                    var imageData = await _imageService.UploadImage(imageBytes, nameFile);
+                    user.PerfilImage = imageData.ImageUrl;
+                    user.UrlDeletePerfilImage = imageData.DeleteImageUrl;
                 }
 
-            } else
+            } else if(imageUpdated)
             {
                 user.PerfilImage = "";
+                user.UrlDeletePerfilImage = "";
+
+                if (!user.UrlDeletePerfilImage.IsNullOrEmpty())
+                {
+                    await _imageService.DeleteImage(user.UrlDeletePerfilImage);
+                }
             }
 
             var result = await _userService.EditUser(user.Id, user);
@@ -174,6 +206,11 @@ namespace AeroclubeManager.Web.Controllers
         [Route("/register")]
         public IActionResult Register(string? returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ManagementAccount");
+            }
+
             var model = new RegisterModelView { ReturnUrl = returnUrl };
             return View();
         }
@@ -182,7 +219,11 @@ namespace AeroclubeManager.Web.Controllers
         [Route("/register")]
         public async Task<IActionResult> Register(RegisterModelView model)
         {
-            
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ManagementAccount");
+            }
+
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError(string.Empty, "Não foi possivel validar o formulário.");

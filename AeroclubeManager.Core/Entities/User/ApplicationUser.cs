@@ -22,6 +22,10 @@ namespace AeroclubeManager.Core.Entities.User
         [MaxLength(255)]
         public string PerfilImage { get; set; } = string.Empty;
 
+
+        [MaxLength(255)]
+        public string UrlDeletePerfilImage { get; set; } = string.Empty;
+
         [Required]
         [EmailAddress]
         [MaxLength(255)]

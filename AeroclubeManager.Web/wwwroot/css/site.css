@@ -47,6 +47,7 @@ nav {
         display: flex;
         align-items: center;
         margin-bottom: 0;
+        padding-left: 0;
     }
 
         nav ul li {

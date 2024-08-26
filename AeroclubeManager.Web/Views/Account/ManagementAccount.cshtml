@@ -136,6 +136,7 @@
             formData.append("DateOfBirth", userNascimento);
             formData.append("UserId", userId);
             formData.append("Document", userCpf);
+            formData.append("ImageUpdated", imageUpdated);
             formData.append("ImagemSelecionada", imagemSelecionada);
             formData.append("Image", userImage);
 
@@ -151,6 +152,7 @@
                         text: response.message,
                         icon: "success"
                     });
+                    atualizarDadosIniciais()
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);

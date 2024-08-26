@@ -3,13 +3,24 @@ let firstName = document.getElementById("firstNameInput")
 let lastName = document.getElementById("lastNameInput")
 let dataNascimento = document.getElementById("nascimento")
 let submitButton = document.getElementById("salvarDados")
+let imageUpdated = false;
+
+const initialCpf = document.getElementById("cpf").value;
+const initialFirstName = document.getElementById("firstNameInput").value;
+const initialLastName = document.getElementById("lastNameInput").value;
+const initialDataNascimento = document.getElementById("nascimento").value;
+const initialSrc = document.getElementById("preview").src;
+
+function atualizarDadosIniciais() {
+    initialCpf = document.getElementById("cpf").value;
+    initialFirstName = document.getElementById("firstNameInput").value;
+    initialLastName = document.getElementById("lastNameInput").value;
+    initialDataNascimento = document.getElementById("nascimento").value;
+    initialSrc = document.getElementById("preview").src;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
-    const initialCpf = document.getElementById("cpf").value;
-    const initialFirstName = document.getElementById("firstNameInput").value;
-    const initialLastName = document.getElementById("lastNameInput").value;
-    const initialDataNascimento = document.getElementById("nascimento").value;
-    const initialSrc = document.getElementById("preview").value;
+    atualizarDadosIniciais()
 
 
     function checkIfValuesChanged() {
@@ -17,20 +28,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const currentFirstName = document.getElementById("firstNameInput").value;
         const currentLastName = document.getElementById("lastNameInput").value;
         const currentDataNascimento = document.getElementById("nascimento").value;
-        const currentSrc = document.getElementById("preview");
+        const currentSrc = document.getElementById("preview").src;
 
         if (
-            currentCpf === initialCpf &&
-            currentFirstName === initialFirstName &&
-            currentLastName === initialLastName &&
-            currentDataNascimento === initialDataNascimento &&
-            initialSrc === currentSrc
+            currentCpf == initialCpf &&
+            currentFirstName == initialFirstName &&
+            currentLastName == initialLastName &&
+            currentDataNascimento == initialDataNascimento &&
+            initialSrc == currentSrc
         ) {
             submitButton.disabled = true; // Desativa o botão
         } else {
             submitButton.disabled = false; // Ativa o botão
         }
     }
+
 
     document.getElementById("cpf").addEventListener("input", checkIfValuesChanged);
     document.getElementById("firstNameInput").addEventListener("input", checkIfValuesChanged);
@@ -39,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     checkIfValuesChanged();
 });
+
 
 
 document.getElementById('cpf').addEventListener('input', function (e) {
@@ -161,6 +174,7 @@ function updatePreview() {
         reader.addEventListener('load', function () {
             previewImage.setAttribute('src', this.result);
             previewImage.style.display = 'block';
+            imageUpdated = true;
             esconderPerfilPopUp()
         });
 
@@ -169,6 +183,7 @@ function updatePreview() {
     } else {
         previewImage.setAttribute('src', "");
         esconderPerfilPopUp()
+        imageUpdated = true;
 
     }
 
