@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AeroclubeManager.Core.Entities.FlightSchool
+namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 {
     public class Airport : BaseEntity
     {
