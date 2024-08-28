@@ -18,7 +18,7 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
         public string Location { get; set; } = string.Empty;
 
 
-        public FlightSchool? FlightSchool { get; set; }
-        public Guid? FlightSchoolId { get; set; } = Guid.Empty;
+        public FlightSchool FlightSchool { get; set; }
+        public Guid FlightSchoolId { get; set; } = Guid.Empty;
     }
 }

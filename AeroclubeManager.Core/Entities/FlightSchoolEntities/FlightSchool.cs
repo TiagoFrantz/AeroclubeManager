@@ -45,9 +45,11 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
         /// <summary>
         /// Exemplo: website, redes sociais, etc
         /// </summary>
-        public ICollection<string> Links { get; set; } = new List<string>();
+        public ICollection<FlightSchoolLink> Links { get; set; } = new List<FlightSchoolLink>();
 
-        public ICollection<FlightSchoolReview?> Reviews { get; set; } = new List<FlightSchoolReview>();
+        public ICollection<Flight> Flights {  get; set; } = new List<Flight>(); 
+
+        public ICollection<FlightSchoolReview> Reviews { get; set; } = new List<FlightSchoolReview>();
 
         public ICollection<UserFlightSchool> Users { get; set; } = new List<UserFlightSchool>();
 

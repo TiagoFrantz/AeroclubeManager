@@ -8,7 +8,7 @@ using AeroclubeManager.Core.Entities.FlightSchoolEntities;
 
 namespace AeroclubeManager.Core.Entities.User
 {
-    public class UserFlightSchool
+    public class UserFlightSchool : BaseEntity
     {
         public ApplicationUser? User { get; set; }
         public string? UserId { get; set; } = Guid.Empty.ToString();

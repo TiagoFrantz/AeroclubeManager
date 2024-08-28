@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 {
-    public enum FlightSchoolRole
+    public enum FlightStatus
     {
-        Admin = 0,
-        Instructor = 1,
-        Student = 2,
-        Manutenção = 3
+        Scheduled,
+        InProgress,
+        Completed,
+        Canceled
     }
 }

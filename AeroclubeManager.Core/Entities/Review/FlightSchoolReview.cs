@@ -28,7 +28,7 @@ namespace AeroclubeManager.Core.Entities.Review
         [Range(1, 5)]
         public double Rating { get; set; } = 1;
 
-        //Esse vai sevrir para de fato mostrar a data criado ou atualizado do review, o createdat do base procuro nao mudar
+        //Esse vai sevrir para de fato mostrar a data criado ou atualizado do review, o createdat do base não mudo
         public DateTime DateOfReview { get; set; } = DateTime.UtcNow;
     }
 }
