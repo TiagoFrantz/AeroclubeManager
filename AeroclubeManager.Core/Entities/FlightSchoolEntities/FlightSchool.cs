@@ -29,8 +29,6 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 
         public Airport? SchoolFlightAirport { get; set; }
 
-        public Guid? SchoolFlightAirportId { get; set; } = Guid.Empty;
-
 
         //CNPJ?
         [MaxLength(255)]

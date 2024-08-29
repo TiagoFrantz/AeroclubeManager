@@ -19,6 +19,6 @@ namespace AeroclubeManager.Core.Entities.User
         [MaxLength(255)]
         public string Description { get; set; } = string.Empty;
 
-        public ICollection<FlightSchoolRole> FlightSchoolRoles { get; set; } = new List<FlightSchoolRole>();
+        public ICollection<UserFlightSchoolRole> FlightSchoolRoles { get; set; } = new List<UserFlightSchoolRole>();
     }
 }

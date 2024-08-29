@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 {
-    public enum FlightSchoolRole
+    public enum FlightSchoolRoleEnum
     {
         Admin = 0,
         Instructor = 1,

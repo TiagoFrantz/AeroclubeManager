@@ -47,5 +47,8 @@ namespace AeroclubeManager.Core.Entities.User
         public DateTime CreatedAt {  get; set; } = DateTime.Now;
 
         public ICollection<FlightSchoolReview> FlightSchoolReviews { get; set; } = new List<FlightSchoolReview>();
+    
+        public ICollection<UserFlightSchool> FlightSchools { get; set; }
+    
     }
 }

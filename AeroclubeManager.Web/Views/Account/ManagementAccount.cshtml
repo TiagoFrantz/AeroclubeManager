@@ -128,7 +128,7 @@
             let userLastName = lastName.value;
             let userNascimento = dataNascimento.value;
             let userId = document.getElementById("userId").value;
-            let userImage = fileInput.files[0]; // Certifique-se que fileInput está definido
+            let userImage = fileInput.files[0]; 
 
             var formData = new FormData();
             formData.append("FirstName", userFirstName);
@@ -144,8 +144,8 @@
                 url: '/Account/EditAccount',
                 type: 'POST',
                 data: formData,
-                contentType: false, // Para garantir que o jQuery não defina um cabeçalho Content-Type
-                processData: false, // Para impedir que o jQuery tente processar os dados
+                contentType: false, 
+                processData: false,
                 success: function (response) {
                     Swal.fire({
                         title: "Atualização",

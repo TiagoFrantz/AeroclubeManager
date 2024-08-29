@@ -232,11 +232,11 @@
 
         document.getElementById('cpf').addEventListener('input', function (e) {
             var value = e.target.value;
-            var cpfPattern = value.replace(/\D/g, '') // Remove qualquer coisa que não seja número
-                .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona ponto após o terceiro dígito
-                .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona ponto após o sexto dígito
-                .replace(/(\d{3})(\d)/, '$1-$2') // Adiciona traço após o nono dígito
-                .replace(/(-\d{2})\d+?$/, '$1'); // Impede entrada de mais de 11 dígitos
+            var cpfPattern = value.replace(/\D/g, '')
+                .replace(/(\d{3})(\d)/, '$1.$2') 
+                .replace(/(\d{3})(\d)/, '$1.$2') 
+                .replace(/(\d{3})(\d)/, '$1-$2') 
+                .replace(/(-\d{2})\d+?$/, '$1'); 
             e.target.value = cpfPattern;
         });
 
@@ -246,7 +246,7 @@
 
             let soma = 0;
             let resto;
-            if (/^(\d)\1{10}$/.test(cpf)) return false; // Verifica sequências iguais
+            if (/^(\d)\1{10}$/.test(cpf)) return false;
 
             for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
             resto = (soma * 10) % 11;
@@ -271,19 +271,19 @@
             var cpf = document.getElementById('cpf').value;
 
             if (!validaCPF(cpf)) {
-                e.preventDefault(); // Impede o envio do formulário
+                e.preventDefault(); 
 
                 Swal.fire({
                     title: "CPF",
                     text: "Verfique se o seu CPF está correto",
                     icon: "error"
                 });
-                document.getElementById('cpf').focus(); // Foca no campo de CPF após o erro
+                document.getElementById('cpf').focus(); 
                 return
             }
             
             if(password1 != confirm){
-                e.preventDefault(); // Impede o envio do formulário
+                e.preventDefault(); 
 
                 Swal.fire({
                     title: "Senhas",

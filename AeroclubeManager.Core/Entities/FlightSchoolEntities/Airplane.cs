@@ -21,9 +21,9 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 
         public short Year { get; set; }
 
-        public FlightSchool? FlightSchoolAirplane { get; set; }
+        public FlightSchool FlightSchool { get; set; }
 
-        public Guid? FlightSchoolId { get; set; } = Guid.Empty;
+        public Guid FlightSchoolId { get; set; } = Guid.Empty;
 
         public AirplaneStatus Status { get; set; } = AirplaneStatus.Available;
 
