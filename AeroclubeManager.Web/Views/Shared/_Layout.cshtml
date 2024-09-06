@@ -203,7 +203,7 @@
                         <div class="accountPanel close">
                             <span>@user.FirstName @user.LastName</span>
                             <a asp-action="ManagementAccount" asp-controller="Account">Configurações</a>
-                            <a href="#">Dashboard</a>
+                            <a asp-controller="FlightSchools" asp-action="Index">Dashboard</a>
                             <button class="btn btn-danger" onclick="mostrarConfirmacaoLogout()">Sair</button>
                         </div>
                     </div>

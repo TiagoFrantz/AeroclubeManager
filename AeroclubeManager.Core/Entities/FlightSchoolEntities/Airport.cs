@@ -15,7 +15,12 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
         [MaxLength(255)]
         public string ICAO { get; set; } = string.Empty;
         [MaxLength(255)]
+        public string State { get; set; } = string.Empty;
+
         public string Location { get; set; } = string.Empty;
+
+        public double? Latitude { get; set; } = null;
+        public double? Longitude { get; set; } = null;
 
 
         public FlightSchool FlightSchool { get; set; }

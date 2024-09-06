@@ -1,0 +1,79 @@
+﻿@model FlightSchoolIndexViewModel
+@{
+	ViewData["Title"] = "Aeroclubes";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/flightschools/index.css" />
+
+}
+
+@if(Model.FlightSchools.Count > 0)
+{
+
+    <div class="main_top">
+        <div class="main_top_left">
+            <h1>Aeroclubes</h1>
+        </div>
+        <div class="main_top_right">
+            <a href="#">Criar um novo aeroclube <img src="imgs/avioes.png" alt="Aviao icon"></a>
+        </div>
+    </div>
+            <div class="main_content">
+
+    @foreach(var flightschool in Model.FlightSchools)
+    {
+
+
+
+            <div class="aeroCard">
+                <div class="aeroCard_top">
+                    <div class="aeroCard_top_left">
+                        <div class="aeroCard_airport">
+                            <img src="imgs/aeroporto.png" alt="Aeroporto">
+                            <span>@flightschool.FlightSchool.SchoolFlightAirport.ICAO</span>
+                        </div>
+                        <div class="aeroCard_aeroclube">
+                            <span>@flightschool.FlightSchool.Name</span>
+                        </div>
+                    </div>
+
+                    <div class="aeroCard_top_right">
+                        <img src="@flightschool.FlightSchool.LogoUrl" alt="Logo Aeroclube - @flightschool.FlightSchool.Name">
+                    </div>
+                </div>
+
+                <div class="aeroCard_middle">
+                    <span class="aeroCard_role">Admin</span>
+                    <span class="aeroCard_infos">Próximo voo: 15/02/2025</span>
+                    <span class="aeroCard_infos">2 novas mensagens</span>
+                    <span class="aeroCard_infos"> <img src="@flightschool.IconUrl" alt="@flightschool.IconUrl" class="spanImg"> @flightschool.TemperatureC°C</span>
+                </div>
+
+                <div class="aeroCard_bottom">
+                    <a href="#">Entrar</a>
+                </div>
+            </div>
+
+
+
+    }
+    </div>
+
+} else
+{
+
+    <div class="criarAeroContainer">
+        <div class="criarAero_header">
+            <h1>Ops...</h1>
+            <span>Você ainda não possui nenhum aeroclube relacionado com sua conta. Você pode <a asp-action="CreateNew">criar um</a> ou <a href="#">pesquise um</a> perto de você.</span>
+        </div>
+
+        <div class="criarAeroContainer__content">
+            <p>
+                Se uma escola de aviação enviou um convite a você, tente visualizá-lo por meio de <a href="#">suas notificações</a>.
+            </p>
+        </div>
+
+    </div>
+}

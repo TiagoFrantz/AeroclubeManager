@@ -1,0 +1,436 @@
+﻿
+.container {
+	background: url(../../imgs/cessna-150-6508183_1920.jpg);
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	min-height: 150vh;
+	padding-top: 50px !important;
+	padding-bottom: 100px;
+	display: flex;
+	justify-content: center;
+	max-width: auto !important;
+	min-width: auto !important;
+}
+
+	.container main {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+	}
+
+.criarAerocontainerC {
+	z-index: 2;
+	position: relative;
+	width: 80%;
+	background-color: rgba(18, 18, 18, 0.549);
+	padding: 30px;
+	box-sizing: border-box;
+	backdrop-filter: blur(10px);
+	color: white;
+	border-radius: 10px;
+	overflow: hidden;
+	max-height: 5000px;
+	transition: 1s;
+	min-width: 500px;
+}
+
+.criarAero_header a {
+	color: white;
+}
+
+.criarAero_header h1 {
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+
+.criarAero_header span {
+	font-size: 20px;
+	text-align: center;
+	justify-content: center;
+}
+
+.criarAerocontainerC__content {
+	margin: 10px;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.367);
+	transition: 0.2s;
+	flex-direction: column;
+}
+
+.criar_formSection {
+	padding: 5px;
+}
+
+	.criar_formSection label {
+		font-size: 20px;
+	}
+
+	.criar_formSection input,
+	.criar_formSection textarea,
+	.criar_formSection select {
+		font-size: 20px;
+		padding: 5px;
+		margin-top: 10px;
+		margin-bottom: 5px;
+		border: none;
+		background-color: rgba(255, 255, 255, 0.192);
+		backdrop-filter: blur(3px);
+		color: white;
+		transition: 0.1s;
+		max-width: 100%;
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+		.criar_formSection input:focus,
+		.criar_formSection textarea:focus {
+			border: none;
+			scale: 1.1;
+		}
+
+	.criar_formSection button {
+		background-color: transparent;
+		padding: 5px;
+		color: white;
+		border: none;
+		min-width: 1px;
+		text-align: start;
+		transition: .2s;
+		margin-bottom: 5px;
+	}
+
+		.criar_formSection button:hover {
+			background-color: #717171;
+			min-width: 100%;
+		}
+
+	.criar_formSection select:focus {
+		background-color: rgb(84, 84, 84);
+	}
+
+	.criar_formSection textarea {
+		font-size: 15px;
+	}
+
+.criarAerocontainerC__content a {
+	color: rgb(235, 235, 235);
+}
+
+.formBottom {
+	width: 100%;
+	display: flex;
+	justify-content: end;
+}
+
+.formTop {
+	width: 100%;
+	display: flex;
+	justify-content: start;
+}
+
+.avancar {
+	margin: 10px;
+}
+
+.criarAerocontainerC__content.initialClose {
+	display: none;
+}
+
+.criarAerocontainerC__content.close {
+	animation: closeAeroContainer .3s forwards;
+	overflow: hidden;
+}
+
+@keyframes closeAeroContainer {
+	0% {
+		display: block;
+		transform: translateY(0);
+		opacity: 1;
+		max-height: 5000px;
+	}
+
+	90% {
+		display: block;
+		max-height: 0;
+		max-width: 0;
+		box-sizing: border-box;
+		padding: 0;
+		margin: 0;
+		transform: translateY(50%);
+	}
+
+	95% {
+		opacity: 0;
+		max-height: 0;
+		height: 0;
+		box-sizing: border-box;
+		padding: 0;
+		margin: 0;
+		transform: translateY(50%);
+	}
+
+	100% {
+		display: none;
+		height: 0;
+		opacity: 0;
+		box-sizing: border-box;
+		padding: 0;
+		margin: 0;
+		width: 0;
+		transform: translateY(50%);
+	}
+}
+
+.criarAerocontainerC__content.open {
+	animation: openAeroContainer 1s forwards;
+}
+
+@keyframes openAeroContainer {
+	0% {
+		display: block !important;
+		opacity: 0;
+		max-height: 0;
+		max-width: 0;
+	}
+
+	90% {
+		opacity: 1;
+		display: block !important;
+		max-height: 1000px;
+		max-width: 10000px;
+	}
+
+	100% {
+		opacity: 1;
+		display: block !important;
+		max-height: 5000px;
+		max-width: 10000px;
+	}
+}
+
+.file-upload-form {
+	width: fit-content;
+	height: fit-content;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.file-upload-label input {
+	display: none;
+}
+
+.file-upload-label svg {
+	height: 50px;
+	fill: rgb(82, 82, 82);
+	margin-bottom: 20px;
+}
+
+.file-upload-label {
+	cursor: pointer;
+	background-color: #ddd;
+	padding: 30px 70px;
+	border-radius: 40px;
+	border: 2px dashed rgb(82, 82, 82);
+	box-shadow: 0px 0px 200px -50px rgba(0, 0, 0, 0.719);
+}
+
+.file-upload-design {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+}
+
+.browse-button {
+	background-color: rgb(82, 82, 82);
+	padding: 5px 15px;
+	border-radius: 10px;
+	color: white;
+	transition: all 0.3s;
+}
+
+	.browse-button:hover {
+		background-color: rgb(14, 14, 14);
+	}
+
+#dropContainer.dragover svg {
+	animation: pulse 1s infinite;
+	transition: 0.2s;
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(0, 121, 107, 0.4);
+	}
+
+	70% {
+		box-shadow: 0 0 10px 20px rgba(0, 121, 107, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba(0, 121, 107, 0);
+	}
+}
+
+#preview {
+	max-height: 100px;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+.criar_logoPopUp {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	padding: 50px;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.445);
+	backdrop-filter: blur(10px);
+	display: none; /* flex no open */
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+	.criar_logoPopUp.open {
+		animation: openLogoPop 0.4s forwards;
+		display: flex;
+	}
+
+		.criar_logoPopUp.open #dropContainer {
+			animation: topUpPopUp 0.4s forwards;
+		}
+
+		.criar_logoPopUp.open .criar {
+			animation: topUpPopUp 0.2s forwards;
+		}
+
+@keyframes openLogoPop {
+	0% {
+		opacity: 0;
+	}
+
+	10% {
+		opacity: 1%;
+	}
+
+	100% {
+		opacity: 100%;
+	}
+}
+
+@keyframes topUpPopUp {
+	0% {
+		transform: translateY(-20%);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
+.criar_logoPopUp.close {
+	animation: closeLogoPop .5s forwards;
+}
+
+	.criar_logoPopUp.close .criar, .criar_logoPopUp.close #dropContainer {
+		animation: topDownPopUp .3s forwards;
+	}
+
+@keyframes closeLogoPop {
+	0% {
+		display: flex;
+		opacity: 100%;
+	}
+
+	90% {
+		display: flex;
+		opacity: 0%;
+	}
+
+	100% {
+		opacity: 0;
+		display: none;
+	}
+}
+
+@keyframes topDownPopUp {
+	0% {
+		transform: translateY(0);
+	}
+
+	100% {
+		transform: translateY(100vh);
+	}
+}
+
+.avancar {
+	background-color: green;
+	border: 1px solid black;
+	transition: .3s;
+}
+
+	.avancar:hover {
+		background-color: rgb(4, 44, 15);
+		scale: 1.1;
+		border: 1px solid black;
+	}
+
+.stepLogo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+	.stepLogo button {
+		width: 100%;
+	}
+
+.closePerfilContainer {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: rgba(255, 0, 0, 0.658);
+	backdrop-filter: blur(1px);
+	color: white;
+	border: none;
+	border-radius: 15px;
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.criar_logoPopUp .criar {
+	color: white;
+	padding-top: 10px;
+	padding-bottom: 30px;
+	font-size: 20px;
+}
+
+.criar_formSection select {
+	width: 100%;
+}
+
+.criar_formSection span {
+	color: white;
+}
+
+
+@media (max-width: 768px) {
+	.criarAerocontainerC {
+		width: 95% !important;
+		min-width: 100px;
+	}
+}

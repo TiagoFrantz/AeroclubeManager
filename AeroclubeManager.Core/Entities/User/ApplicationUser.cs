@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AeroclubeManager.Core.Entities.FlightSchoolEntities;
 using AeroclubeManager.Core.Entities.Review;
 using Microsoft.AspNetCore.Identity;
 
@@ -47,8 +48,8 @@ namespace AeroclubeManager.Core.Entities.User
         public DateTime CreatedAt {  get; set; } = DateTime.Now;
 
         public ICollection<FlightSchoolReview> FlightSchoolReviews { get; set; } = new List<FlightSchoolReview>();
-    
-        public ICollection<UserFlightSchool> FlightSchools { get; set; }
+
+        public ICollection<UserFlightSchool> FlightSchools { get; set; } = new List<UserFlightSchool>();
     
     }
 }

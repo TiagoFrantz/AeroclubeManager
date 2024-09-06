@@ -1,0 +1,250 @@
+﻿@{
+	ViewData["Title"] = "Criar um novo Aeroclube";
+}
+
+@section Styles{
+	<link rel="stylesheet" href="~/css/flightschools/createnewflightschools.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+}
+
+<div class="criarAerocontainerC">
+    <div class="criarAero_header">
+        <h1>Crie um aeroclube</h1>
+        <span style="text-align: center; display: flex;">
+            insira os dados de seu novo aeroclube
+        </span>
+    </div>
+
+    <div class="criarAerocontainerC__content" id="step1">
+        <div class="criar_formSection">
+            <label for="name">Nome do aeroclube:</label>
+            <input type="text"
+                   id="name"
+                   name="Name"
+                   placeholder="Insira o nome aqui"
+                   maxlength="255" />
+        </div>
+        <div class="formBottom">
+            <button class="avancar btn btn-primary" id="A_step1button">
+                Avançar
+            </button>
+        </div>
+    </div>
+
+    <div class="criarAerocontainerC__content" id="step2">
+        <div class="formTop">
+            <button class="avancar btn btn-secondary"
+                    id="V_step2button"
+                    onclick="previousStep(1)">
+                Voltar
+            </button>
+        </div>
+
+        <div class="criar_formSection">
+            <label for="name">Descrição do aeroclube:</label>
+            <textarea type="text"
+                      id="descricao"
+                      name="Descricao"
+                      placeholder="Insira a descrição aqui"
+                      maxlength="65000"
+                      rows="4"></textarea>
+        </div>
+
+        <div class="formBottom">
+            <button class="avancar btn btn-primary" id="A_step2button">
+                Avançar
+            </button>
+        </div>
+    </div>
+
+    <div class="criarAerocontainerC__content" id="step3">
+        <div class="formTop">
+            <button class="avancar btn btn-secondary"
+                    id="V_step3button"
+                    onclick="previousStep(2)">
+                Voltar
+            </button>
+        </div>
+
+        <div class="stepLogo">
+            <img id="preview"
+                 src="https://static.vecteezy.com/ti/vetor-gratis/p3/3715527-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-vetor.jpg"
+                 onerror="this.src='https://static.vecteezy.com/ti/vetor-gratis/p3/3715527-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-vetor.jpg'"
+                 alt="Foto de perfil" />
+            <button class="perfilImage__adicionar btn btn-primary"
+                    onclick="mostrarLogoPopUp()">
+                Adicionar foto
+            </button>
+            <button class="perfilImage__remover btn btn-secondary"
+                    onclick="removePerfilImage()">
+                Remover foto
+            </button>
+        </div>
+
+        <div class="formBottom">
+            <button class="avancar btn btn-primary" id="A_step3button">
+                Avançar
+            </button>
+        </div>
+    </div>
+
+    <div class="criarAerocontainerC__content" id="step4">
+        <div class="formTop">
+            <button class="avancar btn btn-secondary"
+                    id="V_step2button"
+                    onclick="previousStep(3)">
+                Voltar
+            </button>
+        </div>
+
+        <div class="criar_formSection">
+            <label for="estados">Selecione o estado:</label>
+            <select id="estados" name="estados">
+                <option value="AC">Acre (AC)</option>
+                <option value="AL">Alagoas (AL)</option>
+                <option value="AP">Amapá (AP)</option>
+                <option value="AM">Amazonas (AM)</option>
+                <option value="BA">Bahia (BA)</option>
+                <option value="CE">Ceará (CE)</option>
+                <option value="DF">Distrito Federal (DF)</option>
+                <option value="ES">Espírito Santo (ES)</option>
+                <option value="GO">Goiás (GO)</option>
+                <option value="MA">Maranhão (MA)</option>
+                <option value="MT">Mato Grosso (MT)</option>
+                <option value="MS">Mato Grosso do Sul (MS)</option>
+                <option value="MG">Minas Gerais (MG)</option>
+                <option value="PA">Pará (PA)</option>
+                <option value="PB">Paraíba (PB)</option>
+                <option value="PR">Paraná (PR)</option>
+                <option value="PE">Pernambuco (PE)</option>
+                <option value="PI">Piauí (PI)</option>
+                <option value="RJ">Rio de Janeiro (RJ)</option>
+                <option value="RN">Rio Grande do Norte (RN)</option>
+                <option value="RS">Rio Grande do Sul (RS)</option>
+                <option value="RO">Rondônia (RO)</option>
+                <option value="RR">Roraima (RR)</option>
+                <option value="SC">Santa Catarina (SC)</option>
+                <option value="SP">São Paulo (SP)</option>
+                <option value="SE">Sergipe (SE)</option>
+                <option value="TO">Tocantins (TO)</option>
+            </select>
+
+        </div>
+
+        <div class="criar_formSection">
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" placeholder="Digite o nome da cidade..." oninput="buscarDistritos()" list="distritos">
+            <datalist id="distritos"></datalist>
+
+        </div>
+
+        <div class="criar_formSection">
+            <label for="aeroportoNome">Nome do aeroporto:</label>
+            <input type="text" id="aeroportoNome" name="AeroportoNome" maxlength="255">
+        </div>
+
+
+        <div class="criar_formSection">
+            <label for="icao">ICAO:</label>
+            <input type="text" id="icao" name="icao" maxlength="4">
+        </div>
+
+        <div class="formBottom">
+            <button class="avancar btn btn-primary" id="A_step4button">
+                Avançar
+            </button>
+        </div>
+    </div>
+
+
+    <div class="criarAerocontainerC__content" id="step5">
+        <div class="formTop">
+            <button class="avancar btn btn-secondary"
+                    id="V_step2button"
+                    onclick="previousStep(4)">
+                Voltar
+            </button>
+        </div>
+
+        <div class="criar_formSection">
+            <label for="cnpj">CPNJ:</label>
+            <input type="text" id="cnpj" name="Cnpj" maxlength="255">
+            <button onclick="mostrarMensagem('Para garantir a segurança e integridade das informações, precisamos do CNPJ do Aeroclube. Isso ajuda a evitar fraudes e plágios.')">Por quê?</button>
+        </div>
+
+        <div class="criar_formSection">
+            <label for="email">Email do Aeroclube:</label>
+            <input type="text" id="email" name="Email" maxlength="255">
+            <button onclick="mostrarMensagem('Entraremos em contato com o e-mail público do Aeroclube, conhecido por meio das redes sociais e outras fontes oficiais, para confirmar a afiliação do usuário.')">Por quê?</button>
+            <br><span>Insira o e-mail oficial e publicamente conhecido do seu Aeroclube. Entraremos em contato diretamente para confirmar a afiliação do usuário.</span>
+        </div>
+
+
+        <div class="criar_formSection">
+            <label for="ciac">Código do CIAC:</label>
+            <input type="text" id="ciac" name="Ciac" maxlength="4">
+            <button onclick="mostrarMensagem('O código do CIAC (Centro de Instrução de Aviação Civil) está disponível no documento público de revisão de uma escola de aviação. Usamos esse código para evitar fraudes e plágios.')">Por quê?</button>
+
+        </div>
+
+        <div class="formBottom">
+            <button class="avancar btn btn-primary" id="A_step5button">
+                Avançar
+            </button>
+        </div>
+    </div>
+    <div class="criarAerocontainerC__content" id="step6">
+        <div class="formTop">
+            <button class="avancar btn btn-secondary"
+                    id="V_step2button"
+                    onclick="previousStep(5)">
+                Voltar
+            </button>
+        </div>
+
+        <div class="criar_formSection">
+            <span>Confirma a criação do Aeroclube?</span>
+            <span>
+                O aeroclube criado será avaliado, e um email será enviado ao endereço de email publicamente conhecido do aeroclube registrado para confirmação. Esse processo pode levar algumas horas ou dias.
+            </span>
+
+        </div>
+
+        <div class="formBottom">
+            <button style="padding: 10px; width: 100%; margin-top: 10px;" class="avancar btn btn-primary" id="A_step6button">
+                Confirmar
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div class="criar_logoPopUp">
+    <label class="criar" for="image">Logo do aeroclube:</label>
+    <div class="file-upload-form" id="dropContainer">
+        <label for="file" class="file-upload-label">
+            <button class="closePerfilContainer"
+                    onclick="fecharLogoPopUp()">
+                X
+            </button>
+            <div class="file-upload-design">
+                <svg viewBox="0 0 640 512" height="1em">
+                    <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"></path>
+                </svg>
+                <p>Leve seu arquivo até aqui</p>
+                <p>ou</p>
+                <span class="browse-button">selecione do dispositivo</span>
+            </div>
+            <input id="file" type="file" accept="image/*" />
+        </label>
+    </div>
+</div>
+<script>
+    const postUrl = '@Url.Action("CreateNew")';
+</script>
+
+                    @section Scripts{
+
+                        <script src="~/js/flightschools/createnewflightschools.js"></script>
+  
+                    }

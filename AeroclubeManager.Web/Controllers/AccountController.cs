@@ -32,6 +32,7 @@ namespace AeroclubeManager.Web.Controllers
         private readonly ILogger<RegisterModelView> _loggerRegister;
         private readonly IUserService _userService;
         private readonly IImageService _imageService;
+        
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
             IUserStore<ApplicationUser> userStore,
@@ -208,6 +209,7 @@ namespace AeroclubeManager.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                return RedirectToAction("ManagementAccount");
                 return RedirectToAction("ManagementAccount");
             }
 

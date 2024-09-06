@@ -17,6 +17,10 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
         [MaxLength(255)]
         public string Name { get; set; } = string.Empty;
 
+        [MaxLength(255)]
+        public string Email { get; set; } = string.Empty;
+
+
 
         [MaxLength(65535)]
         [Column(TypeName = "TEXT")]
@@ -24,6 +28,8 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 
         [MaxLength(255)]
         public string? LogoUrl { get; set; } = string.Empty;
+
+        public bool IsApproved { get; set; } = true;
 
         public ICollection<Airplane> Planes { get; set; } = new List<Airplane>();
 
