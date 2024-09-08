@@ -1,6 +1,8 @@
 ﻿@model FlightSchoolIndexViewModel
 @{
-	ViewData["Title"] = "Aeroclubes";
+    ViewData["Title"] = "Aeroclubes";
+
+
 }
 
 @section Styles{
@@ -24,13 +26,12 @@
     @foreach(var flightschool in Model.FlightSchools)
     {
 
-
-
             <div class="aeroCard">
                 <div class="aeroCard_top">
                     <div class="aeroCard_top_left">
                         <div class="aeroCard_airport">
-                            <img src="imgs/aeroporto.png" alt="Aeroporto">
+                            <img src="~/imgs/aeroporto.png" alt="Aeroporto">
+                             
                             <span>@flightschool.FlightSchool.SchoolFlightAirport.ICAO</span>
                         </div>
                         <div class="aeroCard_aeroclube">
@@ -44,7 +45,17 @@
                 </div>
 
                 <div class="aeroCard_middle">
-                    <span class="aeroCard_role">Admin</span>
+                    <span class="aeroCard_role">
+
+                        @foreach (var role in flightschool.UserFlightSchool.FlightSchoolRoles)
+                        {
+                            @role.Role
+
+                        }
+                        
+                        
+                    
+                    </span>
                     <span class="aeroCard_infos">Próximo voo: 15/02/2025</span>
                     <span class="aeroCard_infos">2 novas mensagens</span>
                     <span class="aeroCard_infos"> <img src="@flightschool.IconUrl" alt="@flightschool.IconUrl" class="spanImg"> @flightschool.TemperatureC°C</span>

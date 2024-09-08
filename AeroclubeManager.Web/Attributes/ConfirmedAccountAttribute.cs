@@ -28,7 +28,7 @@ namespace AeroclubeManager.Web.Attributes
 
                 if (user == null || !user.EmailConfirmed)
                 {
-                    filterContext.Result = new ForbidResult();
+                    filterContext.Result = new RedirectToActionResult("Login", "Account", null);
                 }
 
             }

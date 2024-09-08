@@ -65,7 +65,7 @@ namespace AeroclubeManager.Web.Controllers
                     }
 
                     if (fsModel.FlightSchool.SchoolFlightAirport.ICAO.Length == 4) {
-                        var weatherInFs = await _weatherService.GetWeatherAsync(/*fsModel.FlightSchool.SchoolFlightAirport.ICAO, */fsModel.FlightSchool.SchoolFlightAirport.Latitude, fsModel.FlightSchool.SchoolFlightAirport.Longitude);
+                        var weatherInFs = await _weatherService.GetWeatherUsingCacheAsync(fsModel.FlightSchool.SchoolFlightAirport.ICAO, fsModel.FlightSchool.SchoolFlightAirport.Latitude, fsModel.FlightSchool.SchoolFlightAirport.Longitude);
                         if (weatherInFs != null)
                         {
                             fsModel.LocationName = weatherInFs.City;
@@ -189,7 +189,8 @@ namespace AeroclubeManager.Web.Controllers
             var userRole = new UserFlightSchoolRole
             {
                 Role = FlightSchoolRoleEnum.Admin,
-                User = flightSchoolUser
+                User = flightSchoolUser,
+                UserId = flightSchoolUser.Id
             };
 
             flightSchoolUser.FlightSchoolRoles.Add(userRole);

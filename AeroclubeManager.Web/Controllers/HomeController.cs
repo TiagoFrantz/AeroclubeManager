@@ -40,6 +40,13 @@ namespace AeroclubeManager.Web.Controllers
             return View();
         }
 
+
+        [Route("credits")]
+        public IActionResult Credits()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

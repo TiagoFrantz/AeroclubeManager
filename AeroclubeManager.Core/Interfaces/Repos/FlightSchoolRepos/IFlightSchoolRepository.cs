@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AeroclubeManager.Core.Entities.FlightSchoolEntities;
+using AeroclubeManager.Core.Entities.User;
 
 namespace AeroclubeManager.Core.Interfaces.Repos.FlightSchoolRepos
 {
@@ -38,6 +39,7 @@ namespace AeroclubeManager.Core.Interfaces.Repos.FlightSchoolRepos
 
         public Task<List<FlightSchool>> GetFlightSchoolsByUserId(string userId);
 
+        public Task<UserFlightSchool?> GetUserFlightSchoolByUserId(Guid flightSchoolId, string userId);
 
     }
 }

@@ -222,6 +222,12 @@ footer {
                 font-size: 30px;
             }
 
+            footer{
+                flex-direction: column;
+                gap: 50px;
+                padding: 20px;
+            }
+
 
 
 }

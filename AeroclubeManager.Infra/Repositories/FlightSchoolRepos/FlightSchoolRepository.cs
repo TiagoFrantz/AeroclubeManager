@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AeroclubeManager.Core.Entities.FlightSchoolEntities;
+using AeroclubeManager.Core.Entities.User;
 using AeroclubeManager.Core.Interfaces.Repos.FlightSchoolRepos;
 using AeroclubeManager.Infra.Data;
 using Azure.Core.GeoJson;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
 {
@@ -102,7 +104,7 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
             var flightSchools =  await _context.FlightSchools
             .Include(fs => fs.Planes)
             .Include(fs => fs.Flights)
-            .Include(fs => fs.Users)
+            .Include(fs => fs.Users).ThenInclude(u => u.FlightSchoolRoles)
             .Include(fs => fs.Reviews)
             .Include(fs => fs.Links)
             .Include(fs => fs.SchoolFlightAirport)
@@ -113,7 +115,32 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
             return flightSchools;
         }
 
-        public async Task<FlightSchool?> UpdateFlightSchool(FlightSchool flightSchool)
+        public async Task<UserFlightSchool?> GetUserFlightSchoolByUserId(Guid flightSchoolId, string userId)
+        {
+            if(flightSchoolId == Guid.Empty || userId.IsNullOrEmpty())
+            {
+                return null;
+            }
+
+            FlightSchool flightSchool = await GetFlightSchoolById(flightSchoolId);
+
+            if(flightSchool == null)
+            {
+                return null;
+            }
+
+            UserFlightSchool user = flightSchool.Users.FirstOrDefault(uf => uf.UserId == userId);
+
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user;
+            }
+
+            public async Task<FlightSchool?> UpdateFlightSchool(FlightSchool flightSchool)
         {
             if(flightSchool == null)
             {

@@ -135,10 +135,23 @@
         <h2>Aeroclube Manager</h2>
         <img src="imgs/aeroclubemanagerlogo.png" alt="" />
         <!--Se não logado-->
-        <a href="#" class="mainLink">
-            Saber mais
-            <img src="imgs/modo-aviao.png" alt="" />
-        </a>
+
+        @if (Model.UserAuthenticated)
+        {
+            <a asp-controller="FlightSchools" class="mainLink">
+                Dashboard
+                <img src="imgs/modo-aviao.png" alt="" />
+            </a>
+        }
+        else
+        {
+            <a href="#" class="mainLink">
+                Saber mais
+                <img src="imgs/modo-aviao.png" alt="" />
+            </a>
+        }
+
+
     </div>
 </div>
 

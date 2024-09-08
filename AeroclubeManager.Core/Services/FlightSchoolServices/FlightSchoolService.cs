@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AeroclubeManager.Core.Entities.FlightSchoolEntities;
+using AeroclubeManager.Core.Entities.User;
 using AeroclubeManager.Core.Interfaces.Repos.FlightSchoolRepos;
 using AeroclubeManager.Core.Interfaces.Services.FlightSchoolServices;
 
@@ -45,6 +46,11 @@ namespace AeroclubeManager.Core.Services.FlightSchoolServices
         public async Task<List<FlightSchool>> GetFlightSchoolsByUserId(string userId)
         {
             return await _repository.GetFlightSchoolsByUserId(userId);
+        }
+
+        public async Task<UserFlightSchool?> GetUserFlightSchoolByUserId(Guid flightSchoolId, string userId)
+        {
+            return await _repository.GetUserFlightSchoolByUserId(flightSchoolId, userId);
         }
 
         public async Task<FlightSchool?> UpdateFlightSchool(FlightSchool flightSchool)
