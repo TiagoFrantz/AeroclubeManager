@@ -34,6 +34,7 @@ namespace AeroclubeManager.Core.Interfaces.Repos.FlightSchoolRepos
         public Task<bool> DeleteFlightSchool(Guid flightSchoolId);
 
         public Task<List<FlightSchool>?> GetAllFlightSchools();
+        public Task<List<FlightSchool>?> GetFlightSchoolsContaining(string name);
 
         public Task<FlightSchool?> GetFlightSchoolById(Guid flightSchoolId);
 

@@ -1,0 +1,125 @@
+﻿@model HomeAeroclubesModelView
+@using AeroclubeManager.Core.Entities.FlightSchoolEntities
+@using PagedList.Mvc;
+@using System.Web.Mvc;
+@{
+	ViewData["Title"] = "Aeroclubes";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/aeroclubes.css" />
+}
+
+     <div class="main_top">
+      <div class="main_top_left">
+        <h1>Aeroclubes</h1>
+        <span>Visualize os aeroclubes cadastrados</span>
+      </div>
+      <div class="main_top_right">
+
+          <form asp-action="Aeroclubes">
+            <input placeholder="Pesquisar" value="@Model.SearchString" name="searchString" type="text" class="pesquisarAero" id="pesquisarAero">
+            <input type="hidden"  name="page" value="@Model.PageNumber" />
+
+        <button type="submit" id="pesquisar" class="pesquisar"><span class="material-symbols-outlined">
+        search
+        </span>
+        </form>
+      </button>
+      </div>
+      </div>
+
+      <div class="main_content">
+
+
+          @if(Model.FlightSchools.Count > 0){
+    @foreach (var item in Model.FlightSchools)
+    {
+   <div class="aero">
+
+        <div class="aero_top" style="background-image: url('@item.LogoUrl');">
+          <span>@item.Name</span>
+        </div>
+
+        <div class="aero_middle">
+          <div class="location">
+            <span>Brasil</span>
+            <span>@item.SchoolFlightAirport.State</span>
+            <span>@item.SchoolFlightAirport.Location</span>
+          </div>
+          <div class="aeronaves">
+            <h3>Aeronaves 
+              <span class="material-symbols-outlined">
+              flight
+              </span>
+            </h3>
+
+            <ul>
+                        @foreach(var plane in item.Planes)
+                        {
+                            <li>@plane.Model</li>
+                        }
+                    </ul>
+          </div>
+        </div>
+
+        <div class="aero_bottom">
+                    <button onclick="mostrarContato('@item.Name', '@item.Email', '@item.SchoolFlightAirport.Location', '')">Entrar em contato</button>
+        </div>
+
+       </div>
+        }
+    } else
+    {
+        <span>Nenhum aeroclube encontrado.</span>
+    }
+
+       
+    </div>
+
+      <div class="main_index">
+        <span class="page-numbers">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            var url = Url.Action("Aeroclubes", new { page = i, searchString = Model.SearchString });
+
+            if(Model.PageNumber == i)
+            {
+            <a class="select" href="@url">@i</a>
+            } else {
+            <a href="@url">@i</a>
+            }
+        }
+
+
+        </span>
+      </div>
+  
+        @section Scripts{
+            <script>
+        function mostrarContato(aeroclubeNome, email, location, site) {
+            Swal.fire({
+                title: "<strong>Contatos do Aeroclube</strong>",
+                icon: "info",
+                html: `
+          <span>Contate o ${aeroclubeNome}: </span>
+            <p><strong>Telefone:</strong> (51) 1234-5678</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Endereço:</strong> ${location}</p>
+            <p><strong>Site:</strong> <a href="${site}" target="_blank">${site}</a></p>
+          `,
+                showCloseButton: true,
+                showCancelButton: false,
+                focusConfirm: false,
+                confirmButtonText: `
+            <i class="fa fa-thumbs-up"></i> OK
+          `,
+                confirmButtonAriaLabel: "OK",
+            });
+
+        }
+    </script>
+
+        }

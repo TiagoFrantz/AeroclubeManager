@@ -22,6 +22,8 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
             _context = context;
         }
 
+       
+
         public async Task<FlightSchool?> CreateFlightSchool(FlightSchool flightSchool)
         {
              if(flightSchool == null)
@@ -113,6 +115,32 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
 
 
             return flightSchools;
+        }
+
+        public async Task<List<FlightSchool>?> GetFlightSchoolsContaining(string name)
+        {
+            if (name.IsNullOrEmpty())
+            {
+                return null;
+            }
+
+            var flightSchools = await _context.FlightSchools
+          .Include(fs => fs.Planes)
+          .Include(fs => fs.Flights)
+          .Include(fs => fs.Users).ThenInclude(u => u.FlightSchoolRoles)
+          .Include(fs => fs.Reviews)
+          .Include(fs => fs.Links)
+          .Include(fs => fs.SchoolFlightAirport)
+          .Where(f => f.Name.Contains(name))
+          .ToListAsync();
+
+            if(flightSchools.Any() == false)
+            {
+                return null;
+            }
+
+            return flightSchools;
+
         }
 
         public async Task<UserFlightSchool?> GetUserFlightSchoolByUserId(Guid flightSchoolId, string userId)

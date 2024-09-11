@@ -48,6 +48,11 @@ namespace AeroclubeManager.Core.Services.FlightSchoolServices
             return await _repository.GetFlightSchoolsByUserId(userId);
         }
 
+        public async Task<List<FlightSchool>?> GetFlightSchoolsContaining(string name)
+        {
+            return await _repository.GetFlightSchoolsContaining(name);
+        }
+
         public async Task<UserFlightSchool?> GetUserFlightSchoolByUserId(Guid flightSchoolId, string userId)
         {
             return await _repository.GetUserFlightSchoolByUserId(flightSchoolId, userId);

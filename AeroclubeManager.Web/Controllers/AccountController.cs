@@ -11,7 +11,6 @@ using System.Net.Mail;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
-using RestSharp;
 using AeroclubeManager.Core.Interfaces.Services.Email;
 using Microsoft.AspNetCore.Authorization;
 using AeroclubeManager.Web.Attributes;
