@@ -23,7 +23,7 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
         public double? Longitude { get; set; } = null;
 
 
-        public FlightSchool FlightSchool { get; set; }
+        public FlightSchool FlightSchool { get; set; } = new FlightSchool();
         public Guid FlightSchoolId { get; set; } = Guid.Empty;
     }
 }

@@ -21,7 +21,7 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 
         public short Year { get; set; }
 
-        public FlightSchool FlightSchool { get; set; }
+        public FlightSchool FlightSchool { get; set; } = new FlightSchool();
 
         public Guid FlightSchoolId { get; set; } = Guid.Empty;
 

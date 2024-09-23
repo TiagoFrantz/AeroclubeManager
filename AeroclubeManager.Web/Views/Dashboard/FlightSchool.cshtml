@@ -1,0 +1,330 @@
+﻿@model DashboardFlightSchoolModelView
+@{
+	Layout = "_LayoutDashboard";
+	ViewData["Title"] = "Aeroclube";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/dashboard/flightschool/styles.css" />
+
+}
+
+
+<div class="pessoasSection">
+    <div class="pessoasCadastradas cardDash">
+        <span class="pessoasCadastradas_numero cardDash_number">
+            50
+        </span>
+        <span class="pessoasCadastradas_text cardDash_text">
+            pessoas cadastradas
+        </span>
+    </div>
+
+    <div class="alunosCadastrados cardDash">
+        <span class="alunosCadastrados_numero cardDash_number">
+            40
+        </span>
+        <span class="alunosCadastrados_text cardDash_text">
+            alunos cadastrados
+        </span>
+    </div>
+
+    <div class="instrutoresCadastrados cardDash">
+        <span class="instrutoresCadastrados_numero cardDash_number">
+            9
+        </span>
+        <span class="instrutoresCadastrados_text cardDash_text">
+            instrutores cadastrados
+        </span>
+    </div>
+</div>
+
+<div class="usuariosSection">
+    <!--Usuários-->
+
+    <div class="usuariosItem">
+        <div class="dashboardHeader planesItem__header"
+             style="justify-content: space-between;">
+            <div class="headerDados"
+                 style="display: flex; align-items: center; gap: 5px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/4327/4327495.png"
+                     alt=""
+                     class="dashboardHeader_icon" />
+                <span>Usuários</span>
+            </div>
+            <div class="pesquisaUsuarios">
+                <input type="text"
+                       id="inputUsuarios"
+                       placeholder="Procure por alguém" />
+                <button id="buttonUsuarios">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="usuariosContent">
+            <div class="usuariosItem_user">
+                <div class="userDados">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg"
+                         alt="Foto do João" />
+                    <span class="usuariosName">João Silva</span>
+                </div>
+                <div class="userFunctions">
+                    <span>Admin</span>
+                </div>
+                <div class="userActions">
+                    <button class="userActions_functions">
+                        permissões
+                    </button>
+                    <button class="userActions_remover">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Links-->
+
+    <div class="linksItem">
+        <div class="dashboardHeader linksItem__header">
+            <img src="https://cdn-icons-png.freepik.com/256/2499/2499303.png?semt=ais_hybrid"
+                 alt=""
+                 class="dashboardHeader_icon" />
+            <span>Links</span>
+            <button class="infoHeaderButton"
+                    onclick="mostrarMsg('Links', 'Você pode criar links para que as pessoas se juntem ao seu aeroclube, especificando suas funções como admin, instrutor ou aluno.')">
+                ?
+            </button>
+        </div>
+
+        <dic class="linksContent">
+            <div class="linksFeitos">
+
+                <div class="linksFeitos_link">
+                    <div class="linksFeitos_dados">
+                        <span>link.com</span>
+                        <span>admin</span>
+                    </div>
+                    <div class="linksFeitos_actions">
+                        <button onclick="copiarTexto('jbjk')">copiar</button>
+                        <button>remover</button>
+                    </div>
+                </div>
+
+                <div class="linksFeitos_link">
+                    <div class="linksFeitos_dados">
+                        <span>link.com</span>
+                        <span>admin</span>
+                    </div>
+                    <div class="linksFeitos_actions">
+                        <button onclick="copiarTexto('jbjk')">copiar</button>
+                        <button>remover</button>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="novoLink">
+                <span>Crie um novo link.</span>
+                <select id="linkRole" name="linkRole">
+                    <option value="admin">Admin</option>
+                    <option value="instrutor">Instrutor</option>
+                    <option value="aluno">Aluno</option>
+                </select>
+                <button class="criarLink">Criar</button>
+            </div>
+        </dic>
+    </div>
+</div>
+
+<div class="aeroSection">
+    <div class="aeroDados">
+        <button class="aeroDisplay">
+            <span class="aeroDisplay__text">Dados do Aeroclube</span>
+
+            <span class="material-symbols-outlined aeroDisplay__icon">
+                chevron_right
+            </span>
+
+        </button>
+
+        <div class="aeroDados_edit">
+            <button class="aeroDados_salvar" onclick="salvarDados()">Salvar</button>
+
+            <!--Nome-->
+            <div class="aeroDado">
+                <label for="Name">Nome do Aeroclube:</label>
+                <input type="text" id="Name" name="Name" placeholder="Digite o nome do Aeroclube">
+            </div>
+
+            <!--Descrição-->
+
+            <div class="aeroDado">
+                <label for="inputDescricao">Descrição do Aeroclube:</label>
+                <textarea id="inputDescricao" name="inputDescricao" rows="4" cols="50" placeholder="Digite a descrição do aeroclube"></textarea>
+            </div>
+
+            <!--Logo aeroclube-->
+
+            <div class="aeroDado aeroDado_imgLogo">
+                <label for="InputLogo">Logo Aeroclube</label>
+                <img id="logoPreview" src="" alt="" class="aeroDado_previewImg" onerror="this.src='https://www.buritama.sp.leg.br/imagens/parlamentares-2013-2016/sem-foto.jpg/image'">
+
+                <input type="file" id="InputLogo" accept="image/*">
+
+            </div>
+
+
+            <!--Links-->
+
+            <div class="aeroDado">
+                <label for="">Links do perfil</label>
+                <div class="aeroDados_content">
+
+                    <div class="aeroDados_content_item">
+                        <span>url.com</span>
+                        <div>
+                            <button class="aeroDados_content_button">x</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="aeroDado_input">
+
+                    <label for="adicionarLink">Adicionar Link</label>
+                    <input type="text" id="adicionarLink" placeholder="Adicionar link">
+                    <input type="text" id="adicionarTextoLink" placeholder="Adicionar um texto ao link">
+
+                    <button id="buttonAdicionarLink">Adicionar</button>
+
+                </div>
+            </div>
+
+
+            <!--Aeroporto-->
+
+            <div class="aeroDado">
+                <label for="">Aeroporto</label>
+
+                <div class="aeroDado_input">
+                    <label for="icaoInput">ICAO</label>
+                    <input type="text" id="icaoInput" maxlength="4" minlength="4" placeholder="ICAO do Aeroporto">
+                </div>
+
+                <div class="aeroDado_input">
+                    <label for="nomeAeroportoInput">Nome do Aeroporto</label>
+                    <input type="text" id="nomeAeroportoInput" placeholder="Insira o Nome do Aeroporto">
+                </div>
+
+                <div class="aeroDado_input">
+                    <label for="estadoAeroportoSelect">Estado</label>
+                    <select name="EstadoAeroportoSelect" id="estadoAeroportoSelect"></select>
+                </div>
+
+                <div class="aeroDado_input">
+                    <label for="localidadeAeroportoInput">Cidade</label>
+                    <input type="text" id="localidadeAeroportoInput" oninput="buscarDistritos()" placeholder="Insira o Local do Aeroporto" list="distritos">
+                    <datalist id="distritos"></datalist>
+
+                </div>
+            </div>
+
+
+            <div class="aeroDado">
+                <label for="">Informações do Aeroclube</label>
+
+                <div class="aeroDado_input">
+                    <label for="cnpjInput">CNPJ do Aeroclube</label>
+                    <input type="text" id="cnpjInput" placeholder="CNPJ do Aeroporto">
+                </div>
+
+                <div class="aeroDado_input">
+                    <label for="ciacInput">CIAC do Aeroporto</label>
+                    <input type="text" id="ciacInput" placeholder="Insira o CIAC do Aeroporto">
+                </div>
+                <button class="infoHeaderButton" onclick="mostrarMsg('CIAC e CNPJ', 'O código do CIAC (Centro de Instrução de Aviação Civil) está disponível no documento público de revisão de uma escola de aviação. Usamos esse código para evitar fraudes e plágios. Para garantir a segurança e integridade das informações, precisamos do CNPJ do Aeroclube. Isso ajuda a evitar fraudes e plágios.')">?</button>
+
+            </div>
+
+            <button class="aeroDados_salvar" onclick="salvarDados()">Salvar</button>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/js/dashboard/flightschool.js"></script>
+
+    <script>
+        var aeroDisplayIcon = document.querySelector(".aeroDisplay__icon")
+        var aeroDados_edit = document.querySelector(".aeroDados_edit")
+        var aeroDisplay = document.querySelector(".aeroDisplay")
+
+        aeroDisplay.addEventListener("click", () => {
+            toggleAeroDados()
+        })
+
+        function toggleAeroDados() {
+            aeroDados_edit.classList.toggle("open")
+            aeroDisplayIcon.classList.toggle("open")
+        }
+    </script>
+
+    <script>
+        function mostrarMsg(title, msg) {
+            Swal.fire({
+                title: title,
+                text: msg,
+                icon: 'info',
+            })
+        }
+
+        function copiarTexto(texto) {
+            var areaTemporaria = document.createElement('textarea')
+            areaTemporaria.value = texto
+            document.body.appendChild(areaTemporaria)
+            areaTemporaria.select()
+            document.execCommand('copy')
+            document.body.removeChild(areaTemporaria)
+            Swal.fire({
+                title: 'Link copiado',
+                icon: 'success',
+            })
+        }
+    </script>
+
+    <script>
+        let inputUsuarios = document.getElementById('inputUsuarios')
+        let buttonUsuarios = document.getElementById('buttonUsuarios')
+        let usuarios = document.querySelectorAll('.usuariosItem_user')
+
+        function procurarUsuarios(valor) {
+            usuarios.forEach((usuario) => {
+                const span = usuario.querySelector('.usuariosName')
+                const name = span.textContent.toLowerCase()
+
+                if (!inputUsuarios) {
+                    usuario.style.display = 'flex'
+                } else if (name.includes(inputUsuarios.value.toLowerCase())) {
+                    usuario.style.display = 'flex'
+                } else {
+                    usuario.style.display = 'none'
+                }
+            })
+        }
+
+        buttonUsuarios.addEventListener('click', () => {
+            procurarUsuarios(inputUsuarios.value)
+        })
+    </script>
+}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AeroclubeManager.Core.Entities.Controllers.FlightSchools;
 using AeroclubeManager.Core.Entities.FlightSchoolEntities;
 using AeroclubeManager.Core.Entities.User;
 using AeroclubeManager.Core.Interfaces.Repos.FlightSchoolRepos;
@@ -69,5 +70,57 @@ namespace AeroclubeManager.Core.Services.FlightSchoolServices
             return result;
         }
 
-    }
+		public async Task<UserInFlightSchoolApprovation> UserApprovedInFlightSchool(Guid flightSchoolId, string userId, List<FlightSchoolRoleEnum>? requiredRole = null)
+		{
+			if (flightSchoolId == Guid.Empty || userId == string.Empty)
+			{
+				return new UserInFlightSchoolApprovation()
+				{
+					Status = UserInFlightSchoolStatus.Rejected,
+					Message = "Usuário inválido"
+				};
+			}
+
+			var userFlightSchool = await GetUserFlightSchoolByUserId(flightSchoolId, userId);
+
+			if (userFlightSchool == null)
+			{
+                return new UserInFlightSchoolApprovation()
+                {
+                    Status = UserInFlightSchoolStatus.Rejected,
+                    Message = "Usuário não encontrado na escola de voo"
+                };
+			}
+
+            if (requiredRole == null)
+            {
+                return new UserInFlightSchoolApprovation()
+                {
+                    Status = UserInFlightSchoolStatus.Approved,
+                    Message = "Usuário permitido. Não foi requirido nenhuma role.",
+                    User = userFlightSchool
+                };
+            }
+
+            bool aprovado = requiredRole.Any(role => userFlightSchool.FlightSchoolRoles.Any(flr => flr.Role == role));
+
+            if(aprovado == false)
+            {
+                return new UserInFlightSchoolApprovation()
+                {
+                    Status = UserInFlightSchoolStatus.Rejected,
+                    Message = "Usuário não possui permissões necessárias"
+                };
+            }
+
+            return new UserInFlightSchoolApprovation()
+            {
+                Status = UserInFlightSchoolStatus.Approved,
+                Message = "Usuário aprovado",
+                User = userFlightSchool
+            };
+
+		}
+	}
 }
+

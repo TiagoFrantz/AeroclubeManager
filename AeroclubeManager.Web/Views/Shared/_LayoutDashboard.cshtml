@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/dashboard/sidebar.css" />
+    <link rel="stylesheet" href="~/css/dashboard/fonts.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    @await RenderSectionAsync("Styles", required: false)
+    <title>@ViewData["Title"] - Dashboard</title>
+  </head>
+  <body>
+    <script src="
+    https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js
+    "></script>
+
+
+
+    <dashboard>
+      <div class="asideOverlay"></div>
+      <button class="menuButton">
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
+      <aside>
+        <div class="asideHeader">
+          <div class="asideHeader__logo">
+            <a href="index.html">
+              <img src="@Model.FlightSchool.LogoUrl" alt="Logo" />
+            </a>
+          </div>
+
+          <div class="asideHeader__data">
+            <a href="#">
+              <img src="@Model.UserFlightSchool.User.PerfilImage"
+                alt="Perfil"
+                class="asideHeader__data_perfil"
+              />
+            </a>
+            <span class="asideHeader__data__schoolName poppins-regular">
+              @Model.FlightSchool.Name
+            </span>
+          </div>
+        </div>
+
+        <div class="asideContent">
+          <div class="asideContent__item">
+            <a asp-controller="Dashboard" asp-action="Index" asp-route-flightSchoolId="@Model.FlightSchool.Id">
+              <span class="material-symbols-outlined asideContent__item__icon">
+                home
+              </span>
+              <span class="asideContent__item__text poppins-regular">Home</span>
+            </a>
+          </div>
+
+          <div class="asideContent__item">
+            <a href="#">
+              <span class="material-symbols-outlined asideContent__item__icon">
+                calendar_today
+              </span>
+              <span class="asideContent__item__text poppins-regular">
+                Agenda
+              </span>
+            </a>
+          </div>
+
+          <div class="asideContent__item">
+            <a href="#">
+              <span class="material-symbols-outlined asideContent__item__icon">
+                groups
+              </span>
+              <span class="asideContent__item__text poppins-regular">
+                Pessoas
+              </span>
+            </a>
+          </div>
+
+          <div class="asideContent__item">
+            <a href="#">
+              <span class="material-symbols-outlined asideContent__item__icon">
+                flight
+              </span>
+              <span class="asideContent__item__text poppins-regular">
+                Aviões
+              </span>
+            </a>
+          </div>
+
+          <div class="asideContent__item">
+                    <a asp-controller="Dashboard" asp-action="FlightSchool" asp-route-flightSchoolId="@Model.FlightSchool.Id">
+              <span class="material-symbols-outlined asideContent__item__icon">
+                source_environment
+              </span>
+              <span class="asideContent__item__text poppins-regular">
+                Aeroclube
+              </span>
+            </a>
+          </div>
+
+          <div class="asideContent__item">
+            <a href="#">
+              <span class="material-symbols-outlined asideContent__item__icon">
+                person
+              </span>
+              <span class="asideContent__item__text poppins-regular">
+                Perfil
+              </span>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <section class="dashboardContent">
+
+          <!--Conteúdo-->
+            @RenderBody()
+          <!--Conteúdo-->
+
+      </section>
+    </dashboard>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="~/js/dashboard/sidebar.js"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+  </body>
+</html>

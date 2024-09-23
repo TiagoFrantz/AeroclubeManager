@@ -9,9 +9,9 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 {
     public class UserFlightSchoolRole : BaseEntity
     {
-        public FlightSchoolRoleEnum Role { get; set; }
+        public FlightSchoolRoleEnum Role { get; set; } = FlightSchoolRoleEnum.Admin;
 
-        public UserFlightSchool User {  get; set; }
-        public Guid UserId { get; set; }
+        public UserFlightSchool User {  get; set; } = new UserFlightSchool();
+        public Guid UserId { get; set; } = Guid.Empty;
     }
 }

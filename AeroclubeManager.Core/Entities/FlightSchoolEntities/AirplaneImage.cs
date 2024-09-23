@@ -19,6 +19,6 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 
         public Guid AirplaneId { get; set; } = Guid.Empty;
 
-        public Airplane Airplane { get; set; }
+        public Airplane Airplane { get; set; } = new Airplane();
     }
 }

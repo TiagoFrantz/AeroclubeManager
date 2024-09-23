@@ -43,6 +43,7 @@ namespace AeroclubeManager.Core.Services.Weather
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }

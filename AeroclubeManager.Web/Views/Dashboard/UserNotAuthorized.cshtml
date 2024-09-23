@@ -1,0 +1,50 @@
+﻿@{
+	ViewData["Title"] = "Usuário não autorizado";
+}
+
+@section Styles{
+	<style>
+
+        .pageContent{
+            width: 100%;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .h1Page {
+            font-size: 2.5em;
+            color: #e74c3c;
+        }
+
+        .spanPage {
+            display: block;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .spanPage a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+                .spanPage a:hover {
+                color: #2980b9;
+            }
+
+	</style>
+}
+
+<div class="pageContent">
+
+<h1 class="h1Page">Você não foi autorizado</h1>
+
+@if (ViewBag.FlightSchoolId != "")
+{
+	<span class="spanPage">Mas pode tentar <a asp-action="Index" asp-controller="Dashboard" asp-route-flightSchoolId="@ViewBag.FlightSchoolId">voltar à página inicial do Aeroclube...</a></span>
+}
+</div>

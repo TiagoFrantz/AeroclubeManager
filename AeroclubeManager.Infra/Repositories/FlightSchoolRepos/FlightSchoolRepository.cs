@@ -91,7 +91,7 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
             var flightSchool = await _context.FlightSchools
                 .Include(fs => fs.Planes)
                 .Include(fs => fs.Flights)
-                .Include(fs => fs.Users)
+            .Include(fs => fs.Users).ThenInclude(u => u.FlightSchoolRoles)
                 .Include(fs => fs.Reviews)
                 .Include(fs => fs.Links)
                 .Include(fs => fs.SchoolFlightAirport) 

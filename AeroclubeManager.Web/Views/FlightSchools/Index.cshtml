@@ -18,7 +18,7 @@
             <h1>Aeroclubes</h1>
         </div>
         <div class="main_top_right">
-            <a href="#">Criar um novo aeroclube <img src="imgs/avioes.png" alt="Aviao icon"></a>
+            <a asp-action="CreateNew">Criar um novo aeroclube <img src="imgs/avioes.png" alt="Aviao icon"></a>
         </div>
     </div>
             <div class="main_content">
@@ -58,11 +58,13 @@
                     </span>
                     <span class="aeroCard_infos">Próximo voo: 15/02/2025</span>
                     <span class="aeroCard_infos">2 novas mensagens</span>
+                    @if(flightschool.TemperatureC != "" && flightschool.TemperatureC != null){
                     <span class="aeroCard_infos"> <img src="@flightschool.IconUrl" alt="@flightschool.IconUrl" class="spanImg"> @flightschool.TemperatureC°C</span>
+                    }
                 </div>
 
                 <div class="aeroCard_bottom">
-                    <a href="#">Entrar</a>
+                    <a asp-controller="Dashboard" asp-route-flightSchoolId="@flightschool.FlightSchool.Id">Entrar</a>
                 </div>
             </div>
 

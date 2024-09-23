@@ -22,7 +22,7 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
 
         public Guid? FlightSchoolId { get; set; } = Guid.Empty;
 
-        public FlightSchool? FlightSchool { get; set; }
+        public FlightSchool? FlightSchool { get; set; } 
 
 
         public Guid? InstructorId { get; set; } = Guid.Empty;

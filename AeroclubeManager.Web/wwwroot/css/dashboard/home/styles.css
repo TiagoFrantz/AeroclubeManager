@@ -1,0 +1,430 @@
+﻿:root {
+    --background-defaultColor: rgba(108, 108, 108, 0.748);
+}
+
+
+dashboard {
+    display: flex;
+}
+
+body {
+    overflow: hidden;
+}
+
+.dashboardContent {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    padding: 20px;
+}
+
+.userSection {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.userSchedule {
+    min-width: 200px;
+    min-height: 300px;
+    background-color: var(--background-defaultColor);
+    border: 2px solid rgba(169, 169, 169, 0.748);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 400px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardHeader {
+    height: 10%;
+    max-height: 200px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+    .dashboardHeader span {
+        color: white;
+        font: var(--defaultFontFamily);
+        font-size: 25px;
+    }
+
+.userSchedule__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    gap: 10px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.userSchedule__item {
+    min-height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+    .userSchedule__item img {
+        width: 20px;
+        object-fit: contain;
+        margin: 3px;
+    }
+
+.userSchedule_date {
+    font-style: italic;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+
+.dashboardHeader_icon {
+    width: 30px;
+    object-fit: contain;
+}
+
+.userData {
+    width: 100%;
+    border-radius: 10px;
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.userData__content {
+    display: flex;
+    height: 100%;
+}
+
+.userData__content__user {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+    .userData__content__user span {
+        color: white;
+        font: var(--defaultFontFamily);
+        margin: 3px;
+        text-align: center;
+    }
+
+.userData_userHeader img {
+    height: 100px;
+    max-width: 100px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.userData_userHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userData__content__data {
+    background-color: rgba(255, 255, 255, 0.132);
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+}
+
+    .userData__content__data::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .userData__content__data::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+    }
+
+    .userData__content__data::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+    }
+
+        .userData__content__data::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+.userData__data {
+    background-color: rgba(255, 255, 255, 0.148);
+    backdrop-filter: blur(1px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 13px;
+    flex: 1;
+}
+
+.userData__data__top {
+    padding: 5px;
+    box-sizing: border-box;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.244);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font: var(--background-defaultColor);
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.userData_data_bottom {
+    padding: 5px;
+    box-sizing: border-box;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font: var(--background-defaultColor);
+    font-size: 40px;
+}
+
+.aeroSection {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.planesItem {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.planesItem__content {
+    min-height: 300px;
+    position: relative;
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(10px);
+    height: 100%;
+}
+
+.planeItem {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    opacity: 0;
+    transition: 1s;
+    height: 100%;
+}
+
+    .planeItem.active {
+        opacity: 1;
+    }
+
+
+.planeItem__info {
+    padding: 15px;
+    background: rgb(255,255,255);
+    background: -moz-linear-gradient(221deg, rgba(255,255,255,0.5775560224089635) 34%, rgba(53,91,190,0.5999649859943977) 77%);
+    background: -webkit-linear-gradient(221deg, rgba(255,255,255,0.5775560224089635) 34%, rgba(53,91,190,0.5999649859943977) 77%);
+    background: linear-gradient(221deg, rgba(255,255,255,0.5775560224089635) 34%, rgba(53,91,190,0.5999649859943977) 77%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#355bbe",GradientType=1);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.nextSlide {
+    position: absolute;
+    right: 15px;
+    height: 50px;
+    width: 50px;
+    background-color: rgba(255, 255, 255, 0.304);
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    padding: 15px;
+    top: 50%;
+    transform: translateY(-100%);
+    cursor: pointer;
+}
+
+    .nextSlide:active img {
+        scale: 1.1;
+    }
+
+    .nextSlide img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+.aeroItem {
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 300px;
+}
+
+.aeroItem__content {
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(5px);
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+}
+
+    .aeroItem__content span {
+        color: white;
+        margin: 5px;
+    }
+
+    .aeroItem__content a {
+        padding: 20px;
+        box-sizing: border-box;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+.actionsSection {
+    margin-top: 20px;
+}
+
+.actionsSection {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fastActions {
+    display: flex;
+    flex-direction: column;
+}
+
+.actions__content {
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions__content_item {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    background-color: rgba(155, 155, 155, 0.296);
+    font-size: 20px;
+}
+
+.dataSection {
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.flightsItem__content {
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(10px);
+}
+
+.actions__content_item:hover {
+    background-color: #888;
+}
+
+
+.dashboardItemContentScroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.dashboardItemContentScroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.dashboardItemContentScroll::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+    .dashboardItemContentScroll::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+
+@media (max-width: 768px) {
+    .userSection {
+        flex-wrap: wrap;
+    }
+
+    .userSchedule {
+        width: 100%;
+        max-width: 768px;
+    }
+
+    .userSchedule__item {
+        min-width: 70%;
+    }
+
+    .userData__content {
+        flex-direction: column;
+    }
+
+    .userData__content__data {
+        min-height: 300px;
+        width: 100%;
+        margin: unset;
+    }
+
+    .userData__data {
+        padding: 5px;
+        box-sizing: border-box;
+    }
+
+    .aeroSection {
+        flex-direction: column;
+    }
+}

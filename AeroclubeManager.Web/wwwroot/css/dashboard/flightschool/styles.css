@@ -1,0 +1,557 @@
+﻿
+:root {
+    --background-defaultColor: rgba(108, 108, 108, 0.574);
+}
+
+.dashboardHeader {
+    height: 10%;
+    max-height: 200px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+    .dashboardHeader span {
+        color: white;
+        font: var(--defaultFontFamily);
+        font-size: 25px;
+    }
+
+.dashboardHeader_icon {
+    width: 30px;
+    object-fit: contain;
+}
+
+.pessoasSection {
+    margin-top: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.cardDash {
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.cardDash_number {
+    font-size: 40px;
+    color: white;
+}
+
+.cardDash_text {
+    font-size: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.849);
+}
+
+.usuariosItem {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.usuariosContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100px;
+    max-height: 400px;
+    overflow-y: auto;
+    gap: 5px;
+    background-color: rgba(255, 255, 255, 0.196);
+    backdrop-filter: blur(5px);
+}
+
+.usuariosSection {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.usuariosItem_user {
+    width: 100%;
+    min-height: 50px;
+    background-color: var(--background-defaultColor);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userDados {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+
+    .userDados img {
+        height: 100%;
+        max-width: 50px;
+    }
+
+.userFunctions {
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.318);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.userActions {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-right: 5px;
+    height: 100%;
+}
+
+    .userActions button {
+        height: 90%;
+        padding: 5px;
+        border: none;
+        border-radius: 2px;
+        color: white;
+        background-color: black;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .userActions button:hover {
+            scale: 1.2;
+        }
+
+.userActions_remover {
+    background-color: red !important;
+}
+
+.pesquisaUsuarios {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    gap: 5px;
+    height: 100%;
+}
+
+    .pesquisaUsuarios input {
+        min-height: 30px;
+        color: black;
+        border: none;
+        padding: 3px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .pesquisaUsuarios button {
+        padding: 5px;
+        box-sizing: border-box;
+        border: none;
+        cursor: pointer;
+        border: 1px solid transparent;
+    }
+
+        .pesquisaUsuarios button:hover {
+            background-color: black;
+            border: 1px solid white;
+        }
+
+        .pesquisaUsuarios button:active {
+            scale: 1.1;
+        }
+
+        .pesquisaUsuarios button:hover span {
+            color: white;
+        }
+
+        .pesquisaUsuarios button span {
+            color: black;
+            font-size: 15px;
+        }
+
+.linksItem {
+    width: 100%;
+}
+
+.linksContent {
+    width: 100%;
+    min-height: 100px;
+    overflow-y: auto;
+    display: flex;
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(5px);
+}
+
+.linksFeitos {
+    background-color: rgba(0, 0, 0, 0.551);
+    padding: 10px;
+    box-sizing: border-box;
+    width: 60%;
+    max-height: 150px;
+    overflow-y: auto;
+    gap: 3px;
+}
+
+.linksFeitos_link {
+    width: 100%;
+    min-height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.062);
+    margin-bottom: 2px;
+}
+
+.linksFeitos_dados {
+    background-color: rgba(255, 255, 255, 0.599);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+    min-width: 30%;
+}
+
+.linksFeitos_actions {
+    min-width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+    .linksFeitos_actions button {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border;
+        border: none;
+        border-radius: 5px;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        transition: .1s;
+    }
+
+        .linksFeitos_actions button:hover {
+            background-color: green;
+            color: white;
+        }
+
+        .linksFeitos_actions button:active {
+            scale: 1.1;
+        }
+
+.infoHeaderButton {
+    background-color: white;
+    padding: 5px;
+    border: none;
+    color: black;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.novoLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 40%;
+    gap: 10px;
+}
+
+    .novoLink span {
+        color: white;
+    }
+
+#linkRole {
+    background-color: #f0f0f0;
+    border: 2px solid #525252;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 220px;
+    color: #333;
+    cursor: pointer;
+}
+
+    #linkRole option {
+        padding: 10px;
+    }
+
+.criarLink {
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.aeroSection {
+    display: flex;
+    align-items: center;
+}
+
+.aeroDados {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    width: 100%;
+}
+
+.aeroDisplay {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+.aeroDisplay__text {
+    color: white;
+    font-size: 20px;
+}
+
+.aeroDisplay__icon {
+    color: white;
+    transition: .3s;
+}
+
+    .aeroDisplay__icon.open {
+        transform: rotate(90deg);
+    }
+
+.aeroDados_edit {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    gap: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    max-height: 0px;
+    transition: .5s;
+    overflow: hidden;
+    background-color: var(--background-defaultColor);
+    backdrop-filter: blur(5px);
+}
+
+.aeroDado {
+    position: absolute;
+}
+
+.aeroDados_edit.open .aeroDado {
+    position: static;
+}
+
+.aeroDados_edit.open {
+    max-height: 5000px;
+    padding: 20px;
+    margin: 10px;
+}
+
+
+.aeroDado_previewImg {
+    max-width: 100px;
+    margin: 10px;
+}
+
+#InputLogo {
+    background-color: #f3f3f3;
+    border: 2px solid #000000;
+    color: #555;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+    #InputLogo:hover {
+        background-color: #e2e6ea;
+        border-color: #979797;
+    }
+
+    #InputLogo:focus {
+        outline: none;
+        border-color: #7b7b7b;
+        box-shadow: 0 0 5px rgba(161, 161, 161, 0.5);
+    }
+
+
+
+
+
+
+
+
+.aeroDado {
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    gap: 10px;
+    background-color: rgba(128, 128, 128, 0.1);
+    padding: 5px;
+    box-sizing: border-box;
+    transition: .1s;
+}
+
+    .aeroDado:hover {
+        background-color: rgba(128, 128, 128, 0.5);
+    }
+
+    .aeroDado label {
+        color: white;
+        font-size: 20px;
+    }
+
+    .aeroDado input, .aeroDado textarea, .aeroDado select {
+        padding: 10px;
+        font-size: 20px;
+        border: none;
+        border-radius: 5px;
+    }
+
+        .aeroDado input:focus, .aeroDado textarea:focus {
+            outline: none;
+            background-color: rgb(219, 219, 219);
+            border-radius: 6px;
+            transition: .2s;
+        }
+
+.aeroDados_content {
+    max-height: 300px;
+    min-height: 0px;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.093);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.aeroDados_salvar {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .aeroDados_salvar:hover {
+        background-color: #45a049;
+    }
+
+
+.aeroDados_content_item {
+    padding: 5px;
+    box-sizing: border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+    .aeroDados_content_item span {
+        color: white;
+    }
+
+.aeroDados_content_button {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+    .aeroDados_content_button:hover {
+        background-color: grey;
+    }
+
+.aeroDado_input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+    .aeroDado_input button {
+        border: none;
+        padding: 5px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background-color: green;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        justify-content: center;
+    }
+
+
+
+
+
+@media (max-width: 768px) {
+    .pessoasSection {
+        overflow-x: scroll;
+    }
+
+    .cardDash {
+        min-width: 100px;
+    }
+
+    .linksContent {
+        flex-direction: column-reverse;
+    }
+
+    .novoLink {
+        width: 100%;
+    }
+
+    .linksFeitos {
+        width: 100%;
+    }
+}

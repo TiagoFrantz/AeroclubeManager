@@ -1,0 +1,294 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+
+:root {
+    --backColorGrey: rgb(203, 203, 203);
+    --defaultFontFamily: "Poppins", sans-serif;
+}
+
+.dashboardContent {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    padding: 20px;
+    background-image: url(../../imgs/cessna-150-6508183_1920.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+dashboard{
+    display: flex;
+}
+
+aside {
+    width: 10%;
+    min-width: 200px;
+    height: 100vh;
+    overflow-y: scroll;
+    background: rgb(182,181,196);
+    background: linear-gradient(207deg, rgba(182,181,196,1) 0%, rgba(93,101,105,1) 41%, rgba(67,70,74,1) 100%);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+    aside::-webkit-scrollbar {
+        display: none;
+    }
+
+.asideHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+aside::-webkit-scrollbar {
+    scrollbar-width: thin;
+}
+
+.asideHeader__logo {
+    width: 90%;
+    background-image: url("https://cursinhoparamedicina.com.br/wp-content/uploads/2020/12/ceu-azul.jpg");
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+    .asideHeader__logo::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(2px);
+    }
+
+    .asideHeader__logo a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        z-index: 3;
+    }
+
+        .asideHeader__logo a img {
+            max-width: 100%;
+            max-height: 50px;
+            transition: .1s;
+            scale: 1.01;
+        }
+
+            .asideHeader__logo a img:hover {
+                scale: 1.05;
+            }
+
+.asideHeader__data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.asideHeader__data_perfil {
+    width: 70px;
+    object-fit: cover;
+    height: 70px;
+    margin: 10px;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+
+    .asideHeader__data_perfil:hover {
+        box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.347);
+    }
+
+
+.asideHeader__data__schoolName {
+    font-size: 25px;
+    font-size: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+    .asideHeader__data__schoolName.anime {
+        animation: marquee 8s infinite linear;
+    }
+
+.asideContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-x: hidden;
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.374);
+    background-image: url(../../imgs/cessna-150-6508183_1920.jpg);
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 10px;
+    transition: .4s;
+}
+
+    .asideContent:hover {
+        box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.432);
+    }
+
+
+
+.asideContent__item {
+    width: 100%;
+    text-decoration: none;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+    .asideContent__item:hover {
+        backdrop-filter: blur(2px);
+    }
+
+        .asideContent__item:hover a span {
+            color: rgb(190, 212, 190);
+        }
+
+    .asideContent__item:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .asideContent__item a {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+        text-align: center;
+        color: white;
+    }
+
+.asideContent__item__icon {
+    color: white;
+    margin-left: 10%;
+}
+
+.asideContent__item__text {
+    font-size: 20px;
+    margin-right: 10%;
+}
+
+.asideOverlay {
+    display: block;
+}
+
+.menuButton {
+    display: none;
+}
+
+@keyframes marquee {
+
+    50% {
+        transform: translateX(110%);
+    }
+
+    50.001% {
+        transform: translateX(-110%);
+    }
+}
+
+@media (max-width: 768px) {
+    aside {
+        position: fixed;
+        width: 0;
+        overflow: hidden;
+        min-width: 0;
+        transition: .3s;
+        height: 100%;
+    }
+
+        aside.open {
+            min-width: 75%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            z-index: 5;
+        }
+
+    .asideOverlay.open {
+        display: block;
+        content: "";
+        z-index: 4;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.367);
+        position: fixed;
+        backdrop-filter: blur(10px);
+    }
+
+    .menuButton {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        width: 50px;
+        height: 50px;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        border: none;
+        background-color: rgba(128, 128, 128, 0.395);
+        backdrop-filter: blur(1px);
+        cursor: pointer;
+        border-radius: 5px;
+        transition: .3s;
+        z-index: 7;
+    }
+
+        .menuButton div {
+            width: 80%;
+            height: 18%;
+            background-color: black;
+            border-radius: 5px;
+        }
+
+        .menuButton.close {
+            left: unset;
+            right: 10px;
+            gap: 0;
+            background-color: rgba(255, 0, 0, 0.301);
+        }
+
+            .menuButton.close div {
+                border-radius: 0;
+                height: 9%;
+            }
+}

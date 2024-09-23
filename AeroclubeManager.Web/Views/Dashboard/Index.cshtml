@@ -1,0 +1,250 @@
+﻿@model DashboardIndexModelView
+@{
+	Layout = "_LayoutDashboard";
+
+	ViewData["Title"] = "Home";
+}
+
+@section Styles{
+	<link rel="stylesheet" href="~/css/dashboard/home/styles.css" />
+
+}
+<script src="
+    https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js
+    "></script>
+
+
+
+<div class="userSection">
+    <div class="userSchedule">
+        <div class="userSchedule__header dashboardHeader">
+            <img src="https://cdn-icons-png.flaticon.com/512/217/217888.png"
+                 alt="Agenda"
+                 class="dashboardHeader_icon" />
+            <span>Sua agenda</span>
+        </div>
+
+        <div class="userSchedule__content dashboardItemContent dashboardItemContentScroll">
+            <div class="userSchedule__item">
+                <img src="https://cdn-icons-png.flaticon.com/512/76/76443.png"
+                     alt="Voo"
+                     class="userSchedule_icon" />
+                <span class="userSchedule_date">13/09 | 14:20</span>
+                <span class="userSchedule__item__content">
+                    Voo de instrução
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="userData">
+        <div class="userData__header dashboardHeader">
+            <img src="https://cdn-icons-png.flaticon.com/512/6341/6341111.png"
+                 alt="Dados"
+                 class="dashboardHeader_icon" />
+            <span>Seus dados</span>
+        </div>
+
+        <div class="userData__content dashboardItemContent">
+            <div class="userData__content__user">
+                <div class="userData_userHeader">
+                    <img src="@Model.UserFlightSchool.User.PerfilImage"
+                         alt="Foto de perfil" />
+                    <span>@Model.UserFlightSchool.User.FirstName  @Model.UserFlightSchool.User.LastName</span>
+                </div>
+
+               
+
+                    @foreach(var role in Model.UserFlightSchool.FlightSchoolRoles)
+                    {
+                    <span class="userFunction">@role.Role</span>
+                    }
+
+               
+            </div>
+
+            <div class="userData__content__data">
+                <div class="userData__data">
+                    <div class="userData__data__top">
+                        <span>500</span>
+                    </div>
+                    <div class="userData_data_bottom">
+                        <span>horas</span>
+                    </div>
+                </div>
+                <div class="userData__data">
+                    <div class="userData__data__top">
+                        <span>PC</span>
+                    </div>
+                    <div class="userData_data_bottom">
+                        <span>brevê</span>
+                    </div>
+                </div>
+                <div class="userData__data">
+                    <div class="userData__data__top">
+                        <span>4</span>
+                    </div>
+                    <div class="userData_data_bottom">
+                        <span>alunos</span>
+                    </div>
+                </div>
+                <div class="userData__data">
+                    <div class="userData__data__top">
+                        <span>20</span>
+                    </div>
+                    <div class="userData_data_bottom">
+                        <span>voos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="aeroSection">
+    <div class="planesItem">
+        <div class="dashboardHeader planesItem__header">
+            <img src="https://cdn-icons-png.flaticon.com/512/5566/5566691.png"
+                 alt=""
+                 class="dashboardHeader_icon" />
+            <span>Aviões</span>
+        </div>
+
+        <div class="planesItem__content slidesParent">
+            <button class="nextSlide" onclick="showNextSlide()">
+                <img src="https://cdn-icons-png.flaticon.com/512/130/130884.png"
+                     alt="" />
+            </button>
+
+            <div class="planeItem"
+                 style="
+                  background-image: url('https://i2.wp.com/voefloripa.com.br/site/wp-content/uploads/2011/12/banner-c152-2.jpg');
+                ">
+                <div class="planeItem__info">
+                    <h3>Cessna 152</h3>
+                    <span>Livre</span>
+                    <span>3 voos hoje</span>
+                </div>
+            </div>
+
+            <div class="planeItem"
+                 style="
+                  background-image: url('https://www.gaz.com.br/uploads/2021/05/Aeroclube-santa-cruz-do-sul.jpg');
+                ">
+                <div class="planeItem__info">
+                    <h3>Piper PA28</h3>
+                    <span>Em manutenção</span>
+                    <span>Sem voos hoje</span>
+                </div>
+            </div>
+
+            <div class="planeItem"
+                 style="
+                  background-image: url('https://cdn.jetphotos.com/400/5/56892_1662079027.jpg');
+                ">
+                <div class="planeItem__info">
+                    <h3>Paulistinha</h3>
+                    <span>Em voo</span>
+                    <span>5 voos hoje</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="aeroItem">
+        <div class="dashboardHeader aeroItem__header">
+            <img src="https://cdn-icons-png.flaticon.com/512/8382/8382446.png"
+                 alt=""
+                 class="dashboardHeader_icon" />
+            <span>Aeroporto - @Model.FlightSchool.SchoolFlightAirport.ICAO.ToUpper()</span>
+        </div>
+
+        <div class="aeroItem__content">
+            <a href="https://metar-taf.com/pt/@Model.FlightSchool.SchoolFlightAirport.ICAO" id="metartaf-DIKLVebg" style="font-size:18px; font-weight:500; color:#000; width:300px; height:435px; display:block">METAR @Model.FlightSchool.SchoolFlightAirport.Name</a>
+            <script async defer crossorigin="anonymous" src="https://metar-taf.com/pt/embed-js/SSSC?u=59034&qnh=hPa&rh=rh&target=DIKLVebg"></script>
+                Não nos responsabilizamos pelas informações mostradas.
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="actionsSection">
+    <div class="fastActions">
+        <div class="dashboardHeader planesItem__header">
+            <img src="https://cdn-icons-png.flaticon.com/512/9206/9206796.png"
+                 alt=""
+                 class="dashboardHeader_icon" />
+            <span>Ações rápidas</span>
+        </div>
+
+        <div class="actions__content">
+            <a href="#" class="actions__content_item">
+                <span>Agendar voo</span>
+            </a>
+            <a href="#" class="actions__content_item">
+                <span>Gerenciar Pilotos</span>
+            </a>
+            <a href="#" class="actions__content_item">
+                <span>Manutenção de Aeronaves</span>
+            </a>
+            <a href="#" class="actions__content_item">
+                <span>Relatórios de Voo</span>
+            </a>
+            <a href="#" class="actions__content_item">
+                <span>Ver Estatísticas</span>
+            </a>
+            <a href="#" class="actions__content_item">
+                <span>Notificações</span>
+            </a>
+            <a href="#" class="actions__content_item">
+                <span>Configurações</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="dataSection">
+    <div class="flightsItem">
+        <div class="dashboardHeader flightsItem__header">
+            <img src="https://cdn-icons-png.flaticon.com/512/8983/8983164.png"
+                 alt=""
+                 class="dashboardHeader_icon" />
+            <span>Voos</span>
+        </div>
+
+        <div class="flightsItem__content">
+            <canvas id="flightsData"></canvas>
+            <script>
+                var ctx = document.querySelector('#flightsData')
+                var flightBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['11/01', '12/01', '13/01', '14/01', '15/01'],
+                        datasets: [
+                            {
+                                label: 'Voos',
+                                data: [10, 20, 30, 40, 50],
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'white',
+                                },
+                            },
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                })
+            </script>
+        </div>
+    </div>
+</div>

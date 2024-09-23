@@ -1,4 +1,5 @@
 ﻿using AeroclubeManager.Core.Entities.AiportDb;
+using AeroclubeManager.Core.Entities.Controllers.FlightSchools;
 using AeroclubeManager.Core.Entities.FlightSchoolEntities;
 using AeroclubeManager.Core.Entities.Services.Image;
 using AeroclubeManager.Core.Entities.User;
@@ -15,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace AeroclubeManager.Web.Controllers 
+namespace AeroclubeManager.Web.Controllers
 {
     public class FlightSchoolsController : Controller
     {
@@ -50,7 +51,7 @@ namespace AeroclubeManager.Web.Controllers
 
             var flightSchoolsModel = new List<FlightSchoolViewModel>();
 
-            foreach(var fs in flightSchools)
+            foreach (var fs in flightSchools)
             {
                 if (fs != null && fs.IsApproved)
                 {
@@ -59,12 +60,13 @@ namespace AeroclubeManager.Web.Controllers
 
                     fsModel.UserFlightSchool = fs.Users.FirstOrDefault(u => u.User.Id == user.Id);
 
-                    if(fsModel.UserFlightSchool == null)
+                    if (fsModel.UserFlightSchool == null)
                     {
                         return BadRequest();
                     }
 
-                    if (fsModel.FlightSchool.SchoolFlightAirport.ICAO.Length == 4) {
+                    if (fsModel.FlightSchool.SchoolFlightAirport.ICAO.Length == 4)
+                    {
                         var weatherInFs = await _weatherService.GetWeatherUsingCacheAsync(fsModel.FlightSchool.SchoolFlightAirport.ICAO, fsModel.FlightSchool.SchoolFlightAirport.Latitude, fsModel.FlightSchool.SchoolFlightAirport.Longitude);
                         if (weatherInFs != null)
                         {
@@ -81,7 +83,7 @@ namespace AeroclubeManager.Web.Controllers
 
             }
 
-                var model = new FlightSchoolIndexViewModel()
+            var model = new FlightSchoolIndexViewModel()
             {
                 User = user,
                 FlightSchools = flightSchoolsModel,
@@ -121,7 +123,7 @@ namespace AeroclubeManager.Web.Controllers
     )
             {
 
-                return BadRequest(new {message = "Valores inválidos."});
+                return BadRequest(new { message = "Valores inválidos." });
             }
 
             var airportDb = await _airportDbService.GetAirportDb(Icao);
@@ -204,11 +206,14 @@ namespace AeroclubeManager.Web.Controllers
 
             if (result == null)
             {
-                return BadRequest(new {message = "Não foi possível criar o Aeroclube. Referência nula."});
+                return BadRequest(new { message = "Não foi possível criar o Aeroclube. Referência nula." });
             }
 
-            return Ok(new { message = "FlightSchool criado com sucesso." +  msgAirportDb});
+            return Ok(new { message = "FlightSchool criado com sucesso." + msgAirportDb });
         }
 
+
+
+
     }
-    }
+}
