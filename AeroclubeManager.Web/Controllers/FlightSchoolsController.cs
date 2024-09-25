@@ -149,6 +149,7 @@ namespace AeroclubeManager.Web.Controllers
                 Email = Email,
                 SchoolFlightAirport = new Airport
                 {
+                    Name = NomeAeroporto,
                     ICAO = Icao,
                     Location = Cidade,
                     State = Estado,
@@ -212,6 +213,12 @@ namespace AeroclubeManager.Web.Controllers
             return Ok(new { message = "FlightSchool criado com sucesso." + msgAirportDb });
         }
 
+        [HttpPost]
+        [Route("flightschool/edit")]
+        public async Task<IActionResult> EditFlightSchool(string flightSchoolId, EditFlightSchool model, IFormFile? logoImage = null)
+        {
+            return Ok();
+        }
 
 
 

@@ -71,6 +71,19 @@
     overflow: hidden;
 }
 
+.salvarLinks {
+    padding: 10px;
+    width: 100%;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+
+
 .usuariosContent {
     display: flex;
     flex-direction: column;
@@ -313,6 +326,7 @@
 }
 
 .aeroSection {
+    width: 100%;
     display: flex;
     align-items: center;
 }

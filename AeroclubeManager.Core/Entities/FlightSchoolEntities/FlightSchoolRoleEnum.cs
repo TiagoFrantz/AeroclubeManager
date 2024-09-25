@@ -11,6 +11,6 @@ namespace AeroclubeManager.Core.Entities.FlightSchoolEntities
         Admin = 0,
         Instructor = 1,
         Student = 2,
-        Manutenção = 3
+        Maintenance = 3
     }
 }

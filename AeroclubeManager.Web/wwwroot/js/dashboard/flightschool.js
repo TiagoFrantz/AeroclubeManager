@@ -129,37 +129,6 @@ function verificarValoresIniciasComAtuais() {
 }
 // validações <-
 
-async function salvarDados() {
-
-    let dadosValidos = verificarValoresIniciasComAtuais()
-
-    if (dadosValidos == false) {
-        Swal.fire({
-            title: "Mude os valores",
-            text: "Os valores são os mesmos que os inciais",
-            icon: 'info',
-        })
-        return false
-    }
-
-    dadosValidos = validarAeroportoNome() && validarDescAeroclube() && validarIcaoAero() && validarCnpjInput() && validarCiac()
-    if (dadosValidos == false) {
-        Swal.fire({
-            title: "Dados inválidos",
-            text: "Os dados estão inválidos",
-            icon: 'info',
-        })
-        return false
-    }
-
-
-    Swal.fire({
-        title: "Dados atualizados",
-        text: "Os dados foram atualizados",
-        icon: 'success',
-    })
-
-}
 
 
 var logoPreview = document.getElementById("logoPreview")

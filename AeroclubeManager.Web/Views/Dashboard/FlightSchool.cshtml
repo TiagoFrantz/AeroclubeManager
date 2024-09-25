@@ -65,27 +65,47 @@
         </div>
 
         <div class="usuariosContent">
-            <div class="usuariosItem_user">
-                <div class="userDados">
-                    <img src="https://randomuser.me/api/portraits/men/1.jpg"
-                         alt="Foto do João" />
-                    <span class="usuariosName">João Silva</span>
+            @foreach (var user in Model.FlightSchool.Users)
+            {
+                <div class="usuariosItem_user">
+                    <div class="userDados">
+                    <img src="@user.User.PerfilImage"
+                         alt="Foto do @user.User.FirstName" />
+                    <span class="usuariosName">@user.User.FirstName @user.User.LastName</span>
                 </div>
                 <div class="userFunctions">
-                    <span>Admin</span>
-                </div>
-                <div class="userActions">
-                    <button class="userActions_functions">
-                        permissões
-                    </button>
-                    <button class="userActions_remover">
-                        <span class="material-symbols-outlined">
-                            delete
-                        </span>
-                    </button>
-                </div>
+                        @foreach (var role in user.FlightSchoolRoles)
+                        {
+                            <span>@role.Role</span>
+                        }
+                    </div>
+
+                        @if (Model.UserFlightSchool.FlightSchoolRoles.Any(fr => fr.Role == FlightSchoolRoleEnum.Admin))
+                    {
+                                        <div class="userActions">
+
+
+                            <button class="userActions_functions">
+                                permissões
+                            </button>
+                            <button class="userActions_remover">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </button>
+                                            </div>
+
+                        }
+
+                
             </div>
+
+            }
+
+
         </div>
+
+
     </div>
 
     <!--Links-->
@@ -105,41 +125,22 @@
         <dic class="linksContent">
             <div class="linksFeitos">
 
-                <div class="linksFeitos_link">
-                    <div class="linksFeitos_dados">
-                        <span>link.com</span>
-                        <span>admin</span>
-                    </div>
-                    <div class="linksFeitos_actions">
-                        <button onclick="copiarTexto('jbjk')">copiar</button>
-                        <button>remover</button>
-                    </div>
-                </div>
-
-                <div class="linksFeitos_link">
-                    <div class="linksFeitos_dados">
-                        <span>link.com</span>
-                        <span>admin</span>
-                    </div>
-                    <div class="linksFeitos_actions">
-                        <button onclick="copiarTexto('jbjk')">copiar</button>
-                        <button>remover</button>
-                    </div>
-                </div>
-
+<!--Conteudo adicionao pelo js-->
 
 
             </div>
-
-            <div class="novoLink">
+              <div class="novoLink">
                 <span>Crie um novo link.</span>
                 <select id="linkRole" name="linkRole">
-                    <option value="admin">Admin</option>
-                    <option value="instrutor">Instrutor</option>
-                    <option value="aluno">Aluno</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Instructor">Instrutor</option>
+                  <option value="Student">Aluno</option>
+                  <option value="Maintenance">Manutenção</option>
                 </select>
                 <button class="criarLink">Criar</button>
-            </div>
+                <button class="salvarLinks">Salvar</button>
+               
+
         </dic>
     </div>
 </div>
@@ -161,21 +162,21 @@
             <!--Nome-->
             <div class="aeroDado">
                 <label for="Name">Nome do Aeroclube:</label>
-                <input type="text" id="Name" name="Name" placeholder="Digite o nome do Aeroclube">
+                <input type="text" id="Name" name="Name" placeholder="Digite o nome do Aeroclube" value="@Model.FlightSchool.Name">
             </div>
 
             <!--Descrição-->
 
             <div class="aeroDado">
                 <label for="inputDescricao">Descrição do Aeroclube:</label>
-                <textarea id="inputDescricao" name="inputDescricao" rows="4" cols="50" placeholder="Digite a descrição do aeroclube"></textarea>
+                <textarea id="inputDescricao" name="inputDescricao" rows="4" cols="50" placeholder="Digite a descrição do aeroclube">@Model.FlightSchool.Description</textarea>
             </div>
 
             <!--Logo aeroclube-->
 
             <div class="aeroDado aeroDado_imgLogo">
                 <label for="InputLogo">Logo Aeroclube</label>
-                <img id="logoPreview" src="" alt="" class="aeroDado_previewImg" onerror="this.src='https://www.buritama.sp.leg.br/imagens/parlamentares-2013-2016/sem-foto.jpg/image'">
+                <img id="logoPreview" src="@Model.FlightSchool.LogoUrl" alt="" class="aeroDado_previewImg" onerror="this.src='https://www.buritama.sp.leg.br/imagens/parlamentares-2013-2016/sem-foto.jpg/image'">
 
                 <input type="file" id="InputLogo" accept="image/*">
 
@@ -216,22 +217,23 @@
 
                 <div class="aeroDado_input">
                     <label for="icaoInput">ICAO</label>
-                    <input type="text" id="icaoInput" maxlength="4" minlength="4" placeholder="ICAO do Aeroporto">
+                    <input type="text" id="icaoInput" maxlength="4" minlength="4" value="@Model.FlightSchool.SchoolFlightAirport.ICAO.ToUpper()" placeholder="ICAO do Aeroporto">
                 </div>
 
                 <div class="aeroDado_input">
                     <label for="nomeAeroportoInput">Nome do Aeroporto</label>
-                    <input type="text" id="nomeAeroportoInput" placeholder="Insira o Nome do Aeroporto">
+                    <input type="text" id="nomeAeroportoInput" value="@Model.FlightSchool.SchoolFlightAirport.Name" placeholder="Insira o Nome do Aeroporto">
                 </div>
 
                 <div class="aeroDado_input">
                     <label for="estadoAeroportoSelect">Estado</label>
                     <select name="EstadoAeroportoSelect" id="estadoAeroportoSelect"></select>
+
                 </div>
 
                 <div class="aeroDado_input">
                     <label for="localidadeAeroportoInput">Cidade</label>
-                    <input type="text" id="localidadeAeroportoInput" oninput="buscarDistritos()" placeholder="Insira o Local do Aeroporto" list="distritos">
+                    <input type="text" id="localidadeAeroportoInput" oninput="buscarDistritos()" value="@Model.FlightSchool.SchoolFlightAirport.Location" placeholder="Insira o Local do Aeroporto" list="distritos">
                     <datalist id="distritos"></datalist>
 
                 </div>
@@ -243,12 +245,12 @@
 
                 <div class="aeroDado_input">
                     <label for="cnpjInput">CNPJ do Aeroclube</label>
-                    <input type="text" id="cnpjInput" placeholder="CNPJ do Aeroporto">
+                    <input type="text" id="cnpjInput" value="@Model.FlightSchool.Document" placeholder="CNPJ do Aeroporto">
                 </div>
 
                 <div class="aeroDado_input">
                     <label for="ciacInput">CIAC do Aeroporto</label>
-                    <input type="text" id="ciacInput" placeholder="Insira o CIAC do Aeroporto">
+                    <input type="text" id="ciacInput" value="@Model.FlightSchool.LicenseNumber" placeholder="Insira o CIAC do Aeroporto">
                 </div>
                 <button class="infoHeaderButton" onclick="mostrarMsg('CIAC e CNPJ', 'O código do CIAC (Centro de Instrução de Aviação Civil) está disponível no documento público de revisão de uma escola de aviação. Usamos esse código para evitar fraudes e plágios. Para garantir a segurança e integridade das informações, precisamos do CNPJ do Aeroclube. Isso ajuda a evitar fraudes e plágios.')">?</button>
 
@@ -264,6 +266,129 @@
 
 @section Scripts{
     <script src="~/js/dashboard/flightschool.js"></script>
+
+    <script>
+        /*links*/
+        let linksCompartilhaveis_lista = []
+        const linksCompartilhaveis_content = document.querySelector('.linksFeitos')
+
+        const linksCompartilhaveis_translations = {
+            "Admin": "Admin",
+            "Instructor": "Instrutor",
+            "Student": "Aluno",
+            "Maintenance": "Manutenção"
+        };
+
+        const linksCompartilhaveis_adicionarButton = document.querySelector(".criarLink")
+        const linksCompartilhaveis_roleSelect = document.querySelector("#linkRole")
+
+        linksCompartilhaveis_adicionarButton.addEventListener("click", () => {
+            linksCompartilhaveis_adicionarLink(linksCompartilhaveis_roleSelect.value)
+        })
+
+        function linksCompartilhaveis_removerLink(role) {
+            linksCompartilhaveis_lista = linksCompartilhaveis_lista.filter(
+                item => item.roleFunction != role,
+            )
+
+            linksCompartilhaveis_atualizarItensLink()
+        }
+
+        function linksCompartilhaveis_adicionarLink(role) {
+            linksCompartilhaveis_lista = linksCompartilhaveis_lista.filter(
+                item => item.roleFunction != role,
+            )
+            const newCodigo = linksCompartilhaveis_gerarCodigo(10)
+
+            let newItem = {
+                roleFunction: role,
+                urlCode: newCodigo,
+                new: false,
+            }
+
+            linksCompartilhaveis_lista.push(newItem)
+
+            linksCompartilhaveis_atualizarItensLink()
+        }
+
+        linksCompartilhaveis_atualizarItensLink()
+        function linksCompartilhaveis_atualizarItensLink() {
+            linksCompartilhaveis_content.innerHTML = ''
+
+            linksCompartilhaveis_lista.forEach((element) => {
+                const linkDiv = document.createElement('div')
+                linkDiv.className = 'linksFeitos_link'
+
+                const dadosDiv = document.createElement('div')
+                dadosDiv.className = 'linksFeitos_dados'
+
+                const linkSpan = document.createElement('span')
+                if (element.new == false) {
+                    linkSpan.textContent =
+                        'O link ficará disponível após salvar os dados.'
+                } else {
+                    linkSpan.textContent = element.urlCode
+                }
+
+                const usuarioSpan = document.createElement('span')
+                usuarioSpan.textContent = linksCompartilhaveis_translations[element.roleFunction] || element.roleFunction;
+
+                dadosDiv.appendChild(linkSpan)
+                dadosDiv.appendChild(usuarioSpan)
+
+                const actionsDiv = document.createElement('div')
+                actionsDiv.className = 'linksFeitos_actions'
+
+                const copiarBtn = document.createElement('button')
+                copiarBtn.textContent = 'copiar'
+
+                if (element.new == true) {
+                    copiarBtn.onclick = function () {
+                        linksCompartilhaveis_copiarTexto(element.urlCode)
+                    }
+                } else {
+                    copiarBtn.onclick = function () {
+                        Swal.fire({
+                            title: 'Salve para copiar o link',
+                            icon: 'info',
+                        })
+                    }
+                }
+
+                const removerBtn = document.createElement('button')
+                removerBtn.textContent = 'remover'
+
+                removerBtn.onclick = function () {
+                    linksCompartilhaveis_removerLink(element.roleFunction)
+                }
+                actionsDiv.appendChild(copiarBtn)
+                actionsDiv.appendChild(removerBtn)
+
+                linkDiv.appendChild(dadosDiv)
+                linkDiv.appendChild(actionsDiv)
+
+                linksCompartilhaveis_content.appendChild(linkDiv)
+            })
+
+            if (linksCompartilhaveis_lista.length == 0) {
+                linksCompartilhaveis_content.innerHTML = "<span style='color:white'>Sem links compartilháveis.</span>"
+            }
+        }
+
+        function linksCompartilhaveis_gerarCodigo(tamanho) {
+            const caracteres =
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+            let codigo = ''
+
+            for (let i = 0; i < tamanho; i++) {
+                const indiceAleatorio = Math.floor(Math.random() * caracteres.length)
+                codigo += caracteres[indiceAleatorio]
+            }
+
+            return codigo
+        }
+    </script>
+
 
     <script>
         var aeroDisplayIcon = document.querySelector(".aeroDisplay__icon")
@@ -327,4 +452,74 @@
             procurarUsuarios(inputUsuarios.value)
         })
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("#estadoAeroportoSelect").value = "@Model.FlightSchool.SchoolFlightAirport.State"
+        })
+    </script>
+
+
+    <script>
+        async function salvarDados() {
+
+            let dadosValidos = verificarValoresIniciasComAtuais()
+
+            if (dadosValidos == false) {
+                Swal.fire({
+                    title: "Mude os valores",
+                    text: "Os valores são os mesmos que os inciais",
+                    icon: 'info',
+                })
+                return false
+            }
+
+            dadosValidos = validarAeroportoNome() && validarDescAeroclube() && validarIcaoAero() && validarCnpjInput() && validarCiac()
+            if (dadosValidos == false) {
+                Swal.fire({
+                    title: "Dados inválidos",
+                    text: "Os dados estão inválidos",
+                    icon: 'info',
+                })
+                return false
+            }
+
+            let formData = new FormData();
+            formData.append("flightSchoolId", "@Model.FlightSchool.Id");
+            formData.append("Name", aeroName.value);
+            formData.append("Description", aeroDesc.value);
+            formData.append("FlightSchoolDocument", cnpjInput.value);
+            formData.append("FlightSchoolLicenseNumber", ciacInput.value);
+            formData.append("AirportState", estadosSelect.value);
+            formData.append("AirportCity", cidadeAeroInput.value);
+            formData.append("ICAO", icaoInput.value);
+            formData.append("AirportName", aeroportoNome.value);
+            formData.append("UpdatedImage", logoAlterado);
+            formData.append("logoImage", $("#InputLogo")[0].files[0]);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionLink("EditFlightSchool", "FlightSchools")',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    Swal.fire({
+                        title: "Dados atualizados",
+                        text: "Os dados foram atualizados",
+                        icon: 'success',
+                    })
+                },
+                error: function () {
+                    Swal.fire({
+                        title: "Erro ao atualizar",
+                        text: "Não foi possível atualizar os dados do aeroclube.",
+                        icon: 'error',
+                    })
+                }
+            });
+
+        }
+    </script>
+
 }
