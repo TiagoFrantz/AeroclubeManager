@@ -14,6 +14,7 @@ let links = [] // links do perfil
 var logoAlterado = false;
 var linksAlterados = false;
 let valoresIniciais = {}
+definirValoresIniciais()
 
 document.addEventListener("DOMContentLoaded", () => {
     definirValoresIniciais()

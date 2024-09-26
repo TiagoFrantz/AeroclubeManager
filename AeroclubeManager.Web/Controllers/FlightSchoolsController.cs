@@ -217,6 +217,69 @@ namespace AeroclubeManager.Web.Controllers
         [Route("flightschool/edit")]
         public async Task<IActionResult> EditFlightSchool(string flightSchoolId, EditFlightSchool model, IFormFile? logoImage = null)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new {message = "Dados inválidos."});
+            }
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            var requiredRoles = new List<FlightSchoolRoleEnum>();
+            requiredRoles.Add(FlightSchoolRoleEnum.Admin);
+
+            var userApproved = await _flightSchoolService.UserApprovedInFlightSchool(Guid.Parse(flightSchoolId), user.Id, requiredRoles);
+            
+            if(userApproved.Status == UserInFlightSchoolStatus.Rejected)
+            {
+                return Forbid(userApproved.Message);
+            }
+
+            var flightSchoolUpdated = await _flightSchoolService.GetFlightSchoolById(flightSchoolId);
+
+            flightSchoolUpdated.Name = model.Name;
+            flightSchoolUpdated.Description = model.Description;
+            flightSchoolUpdated.LicenseNumber = model.FlightSchoolLicenseNumber;
+            flightSchoolUpdated.Document = model.FlightSchoolDocument;
+            flightSchoolUpdated.SchoolFlightAirport.Name = model.AirportName;
+            flightSchoolUpdated.SchoolFlightAirport.Location = model.AirportCity;
+            flightSchoolUpdated.SchoolFlightAirport.State = model.AirportState;
+
+            if(flightSchoolUpdated.SchoolFlightAirport.ICAO.Replace(" ", "").ToLower() != model.ICAO.Replace(" ", "").ToLower())
+            {
+                var airportDb = await _airportDbService.GetAirportDb(model.ICAO);
+
+                if (airportDb != null) {
+                    flightSchoolUpdated.SchoolFlightAirport.ICAO = model.ICAO.Replace(" ", "");
+
+                    flightSchoolUpdated.SchoolFlightAirport.Latitude = airportDb.Latitude;
+                    flightSchoolUpdated.SchoolFlightAirport.Longitude = airportDb.Longitude;
+                }
+            }
+
+            if (model.UpdatedImage && logoImage != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await logoImage.CopyToAsync(memoryStream);
+                    var imageBytes = memoryStream.ToArray();
+                    var nameFile = Guid.NewGuid().ToString();
+                    var imageUrl = await _imageService.UploadImage(imageBytes, nameFile);
+                    flightSchoolUpdated.LogoUrl = imageUrl.ImageUrl;
+                }
+            }
+
+            var result = await _flightSchoolService.UpdateFlightSchool(flightSchoolUpdated);
+
+            if(result == null)
+            {
+                return BadRequest(new { message = "Erro ao atualizar o aeroclube." });
+            }
+
+
             return Ok();
         }
 

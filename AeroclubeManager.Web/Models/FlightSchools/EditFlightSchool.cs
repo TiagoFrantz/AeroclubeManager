@@ -22,7 +22,7 @@ namespace AeroclubeManager.Web.Models.FlightSchools
         public string AirportCity {  get; set; } = string.Empty;
         [Required]
 
-        public string FlightSchoolDocument = string.Empty;
+        public string FlightSchoolDocument { get; set; } = string.Empty;
         [Required]
 
         public string FlightSchoolLicenseNumber { get; set; } = string.Empty;

@@ -13,7 +13,10 @@
 <div class="pessoasSection">
     <div class="pessoasCadastradas cardDash">
         <span class="pessoasCadastradas_numero cardDash_number">
-            50
+            @{
+                int pessoasCadastradas = Model.FlightSchool.Users.Count();
+            }
+           @pessoasCadastradas
         </span>
         <span class="pessoasCadastradas_text cardDash_text">
             pessoas cadastradas
@@ -21,8 +24,11 @@
     </div>
 
     <div class="alunosCadastrados cardDash">
+        @{
+            int alunosCadastrados = Model.FlightSchool.Users.Where(u => u.FlightSchoolRoles.Any(fr => fr.Role == FlightSchoolRoleEnum.Student)).Count();
+        }
         <span class="alunosCadastrados_numero cardDash_number">
-            40
+            @alunosCadastrados
         </span>
         <span class="alunosCadastrados_text cardDash_text">
             alunos cadastrados
@@ -30,8 +36,11 @@
     </div>
 
     <div class="instrutoresCadastrados cardDash">
+        @{
+            int intrutoresCadastrados = Model.FlightSchool.Users.Where(u => u.FlightSchoolRoles.Any(fr => fr.Role == FlightSchoolRoleEnum.Instructor)).Count();
+        }
         <span class="instrutoresCadastrados_numero cardDash_number">
-            9
+            @intrutoresCadastrados
         </span>
         <span class="instrutoresCadastrados_text cardDash_text">
             instrutores cadastrados
@@ -510,10 +519,12 @@
                         icon: 'success',
                     })
                 },
-                error: function () {
+                error: function (xhr, status, error) {
+
+                    var errorMsg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : "Erro desconhecido";
                     Swal.fire({
                         title: "Erro ao atualizar",
-                        text: "Não foi possível atualizar os dados do aeroclube.",
+                        text: "Não foi possível atualizar os dados do aeroclube. " + errorMsg,
                         icon: 'error',
                     })
                 }
