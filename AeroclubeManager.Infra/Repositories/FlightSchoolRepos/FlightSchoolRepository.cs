@@ -194,12 +194,15 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
             flightSchoolToUpdate.SchoolFlightAirport = flightSchool.SchoolFlightAirport;
             flightSchoolToUpdate.Flights = flightSchool.Flights;
 
-            var result = await _context.SaveChangesAsync();
-
-            if(result == 0)
+            try
+            {            var result = await _context.SaveChangesAsync();
+            }catch(Exception error)
             {
+                Console.WriteLine(error);    
                 return null;
             }
+
+     
 
             return flightSchoolToUpdate;
         }

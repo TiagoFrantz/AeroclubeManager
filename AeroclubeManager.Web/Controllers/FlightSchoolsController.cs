@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace AeroclubeManager.Web.Controllers
 {
@@ -218,6 +219,7 @@ namespace AeroclubeManager.Web.Controllers
         public async Task<IActionResult> EditFlightSchool(string flightSchoolId, EditFlightSchool model, IFormFile? logoImage = null)
         {
 
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(new {message = "Dados inválidos."});
@@ -238,8 +240,23 @@ namespace AeroclubeManager.Web.Controllers
                 return Forbid(userApproved.Message);
             }
 
+            List<EditFlightSchoolLink> Links = JsonConvert.DeserializeObject<List<EditFlightSchoolLink>>(model.LinksJson);
+
+            if(Links.Count > 3)
+            {
+                return BadRequest(new {message = "Quantidade de links ultrapassou o limite."});
+            }
             var flightSchoolUpdated = await _flightSchoolService.GetFlightSchoolById(flightSchoolId);
 
+            ICollection<FlightSchoolLink> flightSchoolLinks = Links.Select(link => new FlightSchoolLink { 
+            Text = link.Text,
+            Url = link.Url,
+                FlightSchool = flightSchoolUpdated,
+            FlightSchoolId = flightSchoolUpdated.Id
+            }).ToList();
+
+
+            flightSchoolUpdated.Links = flightSchoolLinks;
             flightSchoolUpdated.Name = model.Name;
             flightSchoolUpdated.Description = model.Description;
             flightSchoolUpdated.LicenseNumber = model.FlightSchoolLicenseNumber;

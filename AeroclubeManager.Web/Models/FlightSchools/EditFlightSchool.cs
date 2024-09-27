@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AeroclubeManager.Core.Entities.FlightSchoolEntities;
 
 namespace AeroclubeManager.Web.Models.FlightSchools
 {
@@ -7,11 +8,9 @@ namespace AeroclubeManager.Web.Models.FlightSchools
         [MaxLength(255)]
         [Required]
         public string Name { get; set; }
-        [MaxLength(255)]
         [Required]
         public string Description { get; set; }
         public bool UpdatedImage { get; set; } = false;
-        public List<EditFlightSchoolLink> Links = new List<EditFlightSchoolLink>();
         [Required]
         public string ICAO { get; set; } = string.Empty;
         [Required]
@@ -26,5 +25,8 @@ namespace AeroclubeManager.Web.Models.FlightSchools
         [Required]
 
         public string FlightSchoolLicenseNumber { get; set; } = string.Empty;
+
+        public string LinksJson {  get; set; } = string.Empty;
+
     }
 }

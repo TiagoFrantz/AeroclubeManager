@@ -10,7 +10,6 @@ const logoInput = document.getElementById("InputLogo")
 const icaoInput = document.getElementById("icaoInput")
 const aeroportoNome = document.getElementById("nomeAeroportoInput")
 const ciacInput = document.getElementById("ciacInput")
-let links = [] // links do perfil 
 var logoAlterado = false;
 var linksAlterados = false;
 let valoresIniciais = {}

@@ -1,6 +1,9 @@
-﻿@model DashboardFlightSchoolModelView
+﻿@using Newtonsoft.Json
+@model DashboardFlightSchoolModelView
 @{
-	Layout = "_LayoutDashboard";
+    Layout = "_LayoutDashboard";
+    string jsonList = JsonConvert.SerializeObject(Model.FlightSchool.Links);
+
 	ViewData["Title"] = "Aeroclube";
 }
 
@@ -273,7 +276,12 @@
 
 
 
+
 @section Scripts{
+        <script>
+      
+        let links = JSON.parse("@Html.Raw(jsonList)")
+    </script>
     <script src="~/js/dashboard/flightschool.js"></script>
 
     <script>
@@ -465,6 +473,8 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelector("#estadoAeroportoSelect").value = "@Model.FlightSchool.SchoolFlightAirport.State"
+            definirValoresIniciais()
+
         })
     </script>
 
@@ -493,6 +503,13 @@
                 return false
             }
 
+            let mappedLinks = links.map(link => ({
+                Text: link.texto,
+                    Url: link.link
+            }));
+
+            console.log(mappedLinks)
+
             let formData = new FormData();
             formData.append("flightSchoolId", "@Model.FlightSchool.Id");
             formData.append("Name", aeroName.value);
@@ -505,6 +522,7 @@
             formData.append("AirportName", aeroportoNome.value);
             formData.append("UpdatedImage", logoAlterado);
             formData.append("logoImage", $("#InputLogo")[0].files[0]);
+            formData.append("LinksJson", JSON.stringify(mappedLinks));
 
             $.ajax({
                 type: "POST",
