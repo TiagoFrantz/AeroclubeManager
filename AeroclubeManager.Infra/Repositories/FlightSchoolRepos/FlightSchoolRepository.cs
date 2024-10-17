@@ -143,6 +143,67 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
 
         }
 
+        public async Task<bool?> DeleteAllFlightSchoolLinks(Guid flightSchoolId)
+        {
+            if (flightSchoolId == Guid.Empty)
+            {
+                return null;
+            }
+
+            var links = _context.FlightSchoolLinks.Where(link => link.FlightSchoolId == flightSchoolId).ToList();
+
+            if (links != null && links.Count > 0)
+            {
+                _context.FlightSchoolLinks.RemoveRange(links);
+                var result = await _context.SaveChangesAsync();
+            }
+
+                return true;
+
+        }
+
+        public async Task<List<FlightSchoolLink>?> UpdateFlightSchoolLinks(Guid flightSchoolId, List<FlightSchoolLink> links)
+        {
+            if (flightSchoolId == Guid.Empty)
+            {
+                return null;
+            }
+
+
+            FlightSchool flightSchool = await GetFlightSchoolById(flightSchoolId);
+
+            if (flightSchool == null)
+            {
+                return null;
+            }
+
+            await DeleteAllFlightSchoolLinks(flightSchoolId);
+
+            foreach (var link in links)
+            {
+                var newLink = new FlightSchoolLink
+                {
+                    Url = link.Url,
+                    Text = link.Text,
+                    FlightSchoolId = flightSchoolId,
+                    FlightSchool = flightSchool
+                };
+
+                _context.FlightSchoolLinks.Add(newLink);
+
+            }
+
+            try{
+                await _context.SaveChangesAsync();
+
+            } catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return await _context.FlightSchoolLinks.ToListAsync();
+
+        }
+
         public async Task<UserFlightSchool?> GetUserFlightSchoolByUserId(Guid flightSchoolId, string userId)
         {
             if(flightSchoolId == Guid.Empty || userId.IsNullOrEmpty())
@@ -187,7 +248,6 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
             flightSchoolToUpdate.Reviews = flightSchool.Reviews;
             flightSchoolToUpdate.Users = flightSchool.Users;
             flightSchoolToUpdate.Planes = flightSchool.Planes;
-            flightSchoolToUpdate.Links = flightSchool.Links;
             flightSchoolToUpdate.LicenseNumber = flightSchool.LicenseNumber;
             flightSchoolToUpdate.LogoUrl = flightSchool.LogoUrl;
             flightSchoolToUpdate.IsApproved = flightSchool.IsApproved;
@@ -195,14 +255,17 @@ namespace AeroclubeManager.Infra.Repositories.FlightSchoolRepos
             flightSchoolToUpdate.Flights = flightSchool.Flights;
 
             try
-            {            var result = await _context.SaveChangesAsync();
-            }catch(Exception error)
+            {   var result = await _context.SaveChangesAsync();
+
+            }
+            catch (Exception error)
             {
                 Console.WriteLine(error);    
-                return null;
             }
+            await UpdateFlightSchoolLinks(flightSchool.Id, flightSchool.Links.ToList());
 
-     
+
+
 
             return flightSchoolToUpdate;
         }
